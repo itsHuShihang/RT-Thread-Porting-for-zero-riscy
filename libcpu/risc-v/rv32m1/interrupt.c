@@ -11,7 +11,7 @@
 #include "rthw.h"
 
 #include "board.h"
-#include "pulpino.h"
+#include "RV32M1_ri5cy.h"
 
 typedef void (*irq_handler_t)(void);
 extern const irq_handler_t isrTable[];
