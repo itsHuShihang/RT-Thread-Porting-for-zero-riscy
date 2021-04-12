@@ -61,6 +61,9 @@
 #define REGP(x) ((volatile unsigned int*)(x))
 #define REG(x) (*((volatile unsigned int*)(x)))
 #define REGP_8(x) (((volatile uint8_t*)(x)))
+/** add reg16 and reg32 definition by myself */
+#define REGP_16(x) (((volatile uint16_t*)(x)))
+#define REGP_32(x) (((volatile uint32_t*)(x)))
 
 /* pointer to mem of apb pulpino unit - PointerSocCtrl */
 #define __PSC__(a) *(unsigned volatile int*) (SOC_CTRL_BASE_ADDR + a)

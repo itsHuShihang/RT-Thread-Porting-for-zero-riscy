@@ -67,7 +67,7 @@ main_entry:
   /* jump to main program entry point (argc = argv = 0) */
   addi x10, x0, 0
   addi x11, x0, 0
-  jal x1, main
+  jal x1, entry    //jal to entry instead of main
   mv s0, a0
   jal  uart_wait_tx_done;
   mv a0, s0

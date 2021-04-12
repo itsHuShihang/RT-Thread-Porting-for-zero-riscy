@@ -9,9 +9,12 @@
  * 2018-11-12     Ernest Chen  modify copyright
  */
 #include "rthw.h"
-#include "gd32vf103.h"
-#include "riscv_encoding.h"
+#include "gd32vf103.h"  //change to pulpino.h
+#include "riscv_encoding.h"  //maybe useless
 
+
+// TMR is timer. I can find the address about timer in timer.h from line 31.
+// need to change the address of these definition
 #define TMR_MSIP 0xFFC
 #define TMR_MSIP_size   0x4
 #define TMR_MTIMECMP 0x8
