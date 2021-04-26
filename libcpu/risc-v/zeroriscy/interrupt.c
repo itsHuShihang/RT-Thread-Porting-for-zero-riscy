@@ -8,9 +8,8 @@
  * 2018/10/01     Bernard      The first version
  */
 
-#include <rthw.h>
-
-#include <board.h>
+#include <stdint.h>
+#include "rthw.h"
 #include "event.h"
 
 typedef void (*irq_handler_t)(void);
