@@ -5,7 +5,6 @@
 *.mif
 ext_mem.dat
 obj.s
-main.s
 hello
 file_i/*
 file_o/*
