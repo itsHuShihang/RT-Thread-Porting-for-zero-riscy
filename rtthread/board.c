@@ -28,6 +28,7 @@
 
 void riscv_clock_init(void)
 {
+    //need to rewrite this function
     SystemInit();
 
     /* ECLIC init */
