@@ -6,8 +6,8 @@
 ext_mem.dat
 obj.s
 hello
-file_i/*
-file_o/*
-file_s/*
-!file_s/crt0_riscv_E.S
-!file_s/pulpino.h
+pulpino/file_i/*
+pulpino/file_o/*
+pulpino/file_s/*
+!pulpino/file_s/crt0_riscv_E.S
+!pulpino/file_s/pulpino.h
