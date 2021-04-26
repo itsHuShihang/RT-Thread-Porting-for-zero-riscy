@@ -34,7 +34,7 @@ void riscv_clock_init(void)
     SystemInit();
 
     /* I have changed these functions about interrupt */
-    int_init();
+    int_init(); //need to write
     int_enable();
     set_csr(mstatus, MSTATUS_MIE);
     // I know that #define MSTATUS_MIE         0x00000008
@@ -42,7 +42,7 @@ void riscv_clock_init(void)
 
 static void ostick_config(rt_uint32_t ticks)
 {
-    // have questions
+    // need to change the addresses of timer registers
     /* set value */
     *(rt_uint64_t *)(TMR_CTRL_ADDR + TMR_MTIMECMP) = ticks;
     /* enable interrupt */

@@ -6,7 +6,7 @@ void SystemInit(void)
     //do something
     /* disable all interrupts */
 
-    system_clock_config();
+    system_clock_config(); //need to write
     // need to rewrite also
     // configure registers to configure clock such as usb clock
 }
