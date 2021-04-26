@@ -42,6 +42,7 @@ void riscv_clock_init(void)
 
 static void ostick_config(rt_uint32_t ticks)
 {
+    // have questions
     /* set value */
     *(rt_uint64_t *)(TMR_CTRL_ADDR + TMR_MTIMECMP) = ticks;
     /* enable interrupt */
@@ -90,7 +91,7 @@ void rt_hw_board_init()
 }
 
 /* This is the timer interrupt service routine. */
-void eclic_mtip_handler(void)
+void eclic_mtip_handler(void) //why don'y use the handler in os? I have known it.
 {
     /* clear value */
     *(rt_uint64_t *)(TMR_CTRL_ADDR + TMR_MTIME) = 0;
@@ -99,7 +100,6 @@ void eclic_mtip_handler(void)
     rt_interrupt_enter();
     /* tick increase */
     rt_tick_increase();
-
     /* leave interrupt */
     rt_interrupt_leave();
 }
