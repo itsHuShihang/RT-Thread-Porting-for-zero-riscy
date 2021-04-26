@@ -10,3 +10,4 @@ file_i/*
 file_o/*
 file_s/*
 !file_s/crt0_riscv_E.S
+!file_s/pulpino.h
