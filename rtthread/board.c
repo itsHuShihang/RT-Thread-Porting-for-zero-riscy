@@ -11,6 +11,8 @@
 #include "rthw.h"
 #include "gd32vf103.h"  //change to pulpino.h
 #include "riscv_encoding.h"  //maybe useless
+#include "riscv-ops.h"
+#include "int.h"
 
 
 // TMR is timer. I can find the address about timer in timer.h from line 31.
@@ -31,11 +33,11 @@ void riscv_clock_init(void)
     //need to rewrite this function
     SystemInit();
 
-    /* ECLIC init */
-    //ECLIC是GD32VF103里的改进型中断控制器，这里应该改成Pulpino里的中断控制器相关函数
-    eclic_init(ECLIC_NUM_INTERRUPTS);
-    eclic_mode_enable();
+    /* I have changed these functions about interrupt */
+    int_init();
+    int_enable();
     set_csr(mstatus, MSTATUS_MIE);
+    // I know that #define MSTATUS_MIE         0x00000008
 }
 
 static void ostick_config(rt_uint32_t ticks)

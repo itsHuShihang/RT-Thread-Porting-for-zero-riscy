@@ -1,4 +1,5 @@
 #include "rewriteTest.h"
+
 void SystemInit(void)
 {
     /* reset the RCC clock configuration to the default reset state */
