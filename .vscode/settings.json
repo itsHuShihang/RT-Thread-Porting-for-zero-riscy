@@ -1,11 +1,13 @@
 {
     "files.associations": {
+        "*.c": "c",
         "rthw.h": "c",
         "rtthread.h": "c",
         "rtdef.h": "c",
         "pulpino.h": "c",
         "rv32m1_ri5cy.h": "c",
         "gd32vf103.h": "c",
-        "system_gd32vf103.h": "c"
+        "system_gd32vf103.h": "c",
+        "int.h": "c"
     }
 }

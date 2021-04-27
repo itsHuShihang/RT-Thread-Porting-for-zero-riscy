@@ -13,42 +13,45 @@
 #include "riscv_encoding.h"  //maybe useless
 #include "riscv-ops.h"
 #include "int.h"
+#include "event.h"
+#include "timer.h"
 
 
 // TMR is timer. I can find the address about timer in timer.h from line 31.
 // need to change the address of these definition
 #define TMR_MSIP 0xFFC
 #define TMR_MSIP_size   0x4
-#define TMR_MTIMECMP 0x8
+//#define TMR_MTIMECMP 0x8
 #define TMR_MTIMECMP_size 0x8
 #define TMR_MTIME 0x0
 #define TMR_MTIME_size 0x8
 
-#define TMR_CTRL_ADDR           0xd1000000
+//#define TMR_CTRL_ADDR           0xd1000000
 #define TMR_REG(offset)         _REG32(TMR_CTRL_ADDR, offset)
 #define TMR_FREQ                ((uint32_t)SystemCoreClock/4)  //units HZ
 
 void riscv_clock_init(void)
 {
-    //need to rewrite this function
-    SystemInit();
+    //useless in zero-riscy
+    //SystemInit();
 
-    /* I have changed these functions about interrupt */
-    int_init(); //need to write
+    /* interrupt initialization */
+    //clear event pending and interrupt pending
+    ECP = 0xFFFFFFFF;
+    ICP = 0xFFFFFFFF;
     int_enable();
-    set_csr(mstatus, MSTATUS_MIE);
-    // I know that #define MSTATUS_MIE         0x00000008
+    set_csr(mstatus, 0x08);
 }
 
 static void ostick_config(rt_uint32_t ticks)
 {
-    // need to change the addresses of timer registers
     /* set value */
-    *(rt_uint64_t *)(TMR_CTRL_ADDR + TMR_MTIMECMP) = ticks;
-    /* enable interrupt */
-    eclic_irq_enable(CLIC_INT_TMR, 0, 0);
-    /* clear value */
-    *(rt_uint64_t *)(TMR_CTRL_ADDR + TMR_MTIME) = 0;
+    *(rt_uint64_t *)(TOCRA) = ticks;
+    /* enable timer A compare interrupt */
+    IER = 1 << 29;
+    int_enable();
+    /* clear timer value */
+    reset_timer();
 }
 
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
@@ -91,10 +94,10 @@ void rt_hw_board_init()
 }
 
 /* This is the timer interrupt service routine. */
-void eclic_mtip_handler(void) //why don'y use the handler in os? I have known it.
+void ISR_TA_CMP(void)
 {
     /* clear value */
-    *(rt_uint64_t *)(TMR_CTRL_ADDR + TMR_MTIME) = 0;
+    reset_timer();
 
     /* enter interrupt */
     rt_interrupt_enter();
