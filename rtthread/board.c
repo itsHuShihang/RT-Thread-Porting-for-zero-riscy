@@ -57,8 +57,8 @@ static void ostick_config(rt_uint32_t ticks)
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
 
 //可以更改 RT_HEAP_SIZE 的大小，至少大于各个动态申请内存大小之和，但要小于芯片 RAM 总大小
-#define RT_HEAP_SIZE 1024
-static uint32_t rt_heap[RT_HEAP_SIZE];  // heap default size: 4K(1024 * 4)
+#define RT_HEAP_SIZE 1024// 16k
+static uint32_t rt_heap[RT_HEAP_SIZE];  // heap default size: 4K(1024 * 4)  total 32k
 RT_WEAK void *rt_heap_begin_get(void)
 {
     return rt_heap;
