@@ -73,3 +73,77 @@ main_entry:
   mv a0, s0
   /* if program exits call exit routine from library */
 //  jal  x1, exit
+
+
+/* ================================= [ illegal instruction handler] === */
+illegal_insn_handler:
+  addi x2, x2, -EXCEPTION_STACK_SIZE
+  sw x1, 0x5C(x2)
+  jal x1, store_regs
+  la x1, end_except
+  jal x0, illegal_insn_handler_c
+
+/* ================================= [ ecall instruction handler] === */
+ecall_insn_handler:
+  addi x2, x2, -EXCEPTION_STACK_SIZE
+  sw x1, 0x5C(x2)
+  jal x1, store_regs
+  la x1, end_except
+  jal x0, ecall_insn_handler_c
+
+// saves all caller-saved registers (except return address)
+store_regs:
+  sw  x3, 0x00(x2)  // gp
+  sw  x4, 0x04(x2)  // tp
+  sw  x5, 0x08(x2)  // t0
+  sw  x6, 0x0c(x2)  // t1
+  sw  x7, 0x10(x2)  // t2
+  sw x10, 0x14(x2)  // a0
+  sw x11, 0x18(x2)  // a1
+  sw x12, 0x1c(x2)  // a2
+  sw x13, 0x20(x2)  // a3
+  sw x14, 0x24(x2)  // a4
+  sw x15, 0x28(x2)  // a5
+  jalr x0, x1
+
+// load back registers from stack
+end_except:
+  lw  x3, 0x00(x2)
+  lw  x4, 0x04(x2)
+  lw  x5, 0x08(x2)
+  lw  x6, 0x0c(x2)
+  lw  x7, 0x10(x2)
+  lw x10, 0x14(x2)
+  lw x11, 0x18(x2)
+  lw x12, 0x1c(x2)
+  lw x13, 0x20(x2)
+  lw x14, 0x24(x2)
+  lw x15, 0x28(x2)
+  lw  x1, 0x5C(x2)
+  addi x2, x2, EXCEPTION_STACK_SIZE
+  mret
+
+  .global _init
+  .global _fini
+_init:
+_fini:
+  # These don't have to do anything since we use init_array/fini_array.
+  ret
+
+/* =================================================== [ exceptions ] === */
+/* This section has to be down here, since we have to disable rvc for it  */
+
+  .section .vectors, "ax"
+  .option norvc;
+
+  // reset vector
+  .org 0x80
+  jal x0, reset_handler
+
+  // illegal instruction exception
+  .org 0x84
+  jal x0, illegal_insn_handler
+
+  // ecall handler
+  .org 0x88
+  jal x0, ecall_insn_handler
