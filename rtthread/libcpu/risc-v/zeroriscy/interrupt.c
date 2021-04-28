@@ -11,9 +11,10 @@
 #include <stdint.h>
 #include "rthw.h"
 #include "event.h"
+#include "int.h"
 
 typedef void (*irq_handler_t)(void);
-extern const irq_handler_t isrTable[];
+extern irq_handler_t isrTable[];
 
 void SystemIrqHandler(uint32_t mcause)
 {
@@ -29,4 +30,9 @@ void SystemIrqHandler(uint32_t mcause)
         /* Now call the real irq handler for intNum */
         isrTable[intNum]();
     }
+}
+
+void SystemIrqHandler_set(irq_handler_t userHandler, int vector)
+{
+    isrTable[vector] = userHandler;
 }

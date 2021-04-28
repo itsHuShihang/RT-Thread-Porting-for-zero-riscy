@@ -8,13 +8,16 @@
  * 2017-07-24     Tanek        the first version
  * 2018-11-12     Ernest Chen  modify copyright
  */
+#include <stdint-gcc.h>
 #include "rthw.h"
-#include "gd32vf103.h"  //change to pulpino.h
-#include "riscv_encoding.h"  //maybe useless
+//#include "gd32vf103.h"  //change to pulpino.h
+//#include "riscv_encoding.h"  //maybe useless
+#include "pulpino.h"
 #include "riscv-ops.h"
 #include "int.h"
 #include "event.h"
 #include "timer.h"
+#include "interrupt.h"
 
 
 // TMR is timer. I can find the address about timer in timer.h from line 31.
@@ -27,8 +30,9 @@
 #define TMR_MTIME_size 0x8
 
 //#define TMR_CTRL_ADDR           0xd1000000
+#define SystemCoreClock 12000000  //units Hz
 #define TMR_REG(offset)         _REG32(TMR_CTRL_ADDR, offset)
-#define TMR_FREQ                ((uint32_t)SystemCoreClock/4)  //units HZ
+#define TMR_FREQ                ((uint32_t)SystemCoreClock)  //units HZ
 
 void riscv_clock_init(void)
 {
@@ -45,6 +49,8 @@ void riscv_clock_init(void)
 
 static void ostick_config(rt_uint32_t ticks)
 {
+    /* set interrupt handler of timer compare */
+    SystemIrqHandler_set(ISR_TA_CMP, 29);
     /* set value */
     *(rt_uint64_t *)(TOCRA) = ticks;
     /* enable timer A compare interrupt */

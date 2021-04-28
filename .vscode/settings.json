@@ -8,6 +8,8 @@
         "rv32m1_ri5cy.h": "c",
         "gd32vf103.h": "c",
         "system_gd32vf103.h": "c",
-        "int.h": "c"
+        "int.h": "c",
+        "riscv_encoding.h": "c",
+        "riscv-ops.h": "c"
     }
 }
