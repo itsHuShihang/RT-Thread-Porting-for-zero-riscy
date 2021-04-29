@@ -1,5 +1,10 @@
 import os
 import shutil
+import time
+
+print('*************************************************')
+print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+print('Start, please wait...')
 
 dir_C = os.getcwd()
 
@@ -34,7 +39,7 @@ def C2I():
         if(len(tmp) == 1):
             pass
         elif(tmp[1].lower() == 'c'):
-            #os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' './file_i/pulpino_i/' + tmp[0] + '.i ' + './pulpino/file_c/' + file_pulpino)
+            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/pulpino_i/' + tmp[0] + '.i ' + './pulpino/file_c/' + file_pulpino)
             print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/pulpino_i/' + tmp[0] + '.i ' + './pulpino/file_c/' + file_pulpino)
 
     for file_rtthread_cpu in files_rtthread_cpu:
@@ -42,7 +47,7 @@ def C2I():
         if(len(tmp) == 1):
             pass
         elif(tmp[1].lower() == 'c'):
-            #os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' './file_i/pulpino_i/' + tmp[0] + '.i ' + './pulpino/file_c/' + file_pulpino)
+            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/rtthread_i/' + tmp[0] + '.i ' + './rtthread/libcpu/risc-v/' + file_rtthread_cpu)
             print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/rtthread_i/' + tmp[0] + '.i ' + './rtthread/libcpu/risc-v/' + file_rtthread_cpu)
 
     for file_rtthread_src in files_rtthread_src:
@@ -50,7 +55,7 @@ def C2I():
         if(len(tmp) == 1):
             pass
         elif(tmp[1].lower() == 'c'):
-            #os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' './file_i/pulpino_i/' + tmp[0] + '.i ' + './pulpino/file_c/' + file_pulpino)
+            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/rtthread_i/' + tmp[0] + '.i ' + './rtthread/src/' + file_rtthread_src)
             print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/rtthread_i/' + tmp[0] + '.i ' + './rtthread/src/' + file_rtthread_src)
 
     os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' './file_i/pulpino_i/' + tmp[0] + '.i ' + './pulpino/file_c/' + file_pulpino)
@@ -92,7 +97,7 @@ def I2S():
         if(len(tmp) == 1):
             pass
         elif(tmp[1].lower() == 'c'):
-            #os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' './file_i/pulpino_i/' + tmp[0] + '.i ' + './pulpino/file_c/' + file_pulpino)
+            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -S -o ' + './file_s/pulpino_s/' + tmp[0] + '.s ' + './file_i/pulpino_i/' + file_pulpino)
             print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -S -o ' + './file_s/pulpino_s/' + tmp[0] + '.s ' + './file_i/pulpino_i/' + file_pulpino)
 
     for file_rtthread in files_rtthread:
@@ -100,7 +105,7 @@ def I2S():
         if(len(tmp) == 1):
             pass
         elif(tmp[1].lower() == 'c'):
-            #os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' './file_i/pulpino_i/' + tmp[0] + '.i ' + './pulpino/file_c/' + file_pulpino)
+            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -S -o ' + './file_s/rtthread_s/' + tmp[0] + '.s ' + './file_i/rtthread_i/' + file_rtthread)
             print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -S -o ' + './file_s/rtthread_s/' + tmp[0] + '.s ' + './file_i/rtthread_i/' + file_rtthread)
 
 def S2O():
@@ -133,7 +138,7 @@ def S2O():
         if(len(tmp) == 1):
             pass
         elif(tmp[1].lower() == 'c'):
-            #os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' './file_i/pulpino_i/' + tmp[0] + '.i ' + './pulpino/file_c/' + file_pulpino)
+            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ' + './file_o/pulpino_o/' + tmp[0] + '.o ' + './file_s/pulpino_s/' + file_pulpino)
             print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ' + './file_o/pulpino_o/' + tmp[0] + '.o ' + './file_s/pulpino_s/' + file_pulpino)
 
     for file_rtthread in files_rtthread:
@@ -141,7 +146,7 @@ def S2O():
         if(len(tmp) == 1):
             pass
         elif(tmp[1].lower() == 'c'):
-            #os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' './file_i/pulpino_i/' + tmp[0] + '.i ' + './pulpino/file_c/' + file_pulpino)
+            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ' + './file_o/rtthread_o/' + tmp[0] + '.o ' + './file_s/rtthread_s/' + file_rtthread)
             print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ' + './file_o/rtthread_o/' + tmp[0] + '.o ' + './file_s/rtthread_s/' + file_rtthread)
 
 def Ld():
@@ -169,13 +174,16 @@ def Ld():
     
     cmd = cmd + 'libgcc.a libc.a -o hello'
     print(cmd)
-    # os.system(cmd)
-    # os.system('riscv32-unknown-elf-objcopy -O ihex hello helloworld.hex')
+    os.system(cmd)
+    os.system('riscv32-unknown-elf-objcopy -O ihex hello helloworld.hex')
 
 
 C2I()
 I2S()
 S2O()
 Ld()
-# os.system('riscv32-unknown-elf-objdump -D hello > obj.s')
-# os.system('python hex2hex2.py')
+os.system('riscv32-unknown-elf-objdump -D hello > obj.s')
+os.system('python hex2hex2.py')
+print('riscv32-unknown-elf-objdump -D hello > obj.s')
+print('python hex2hex2.py')
+print('Done!')
