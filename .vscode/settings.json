@@ -12,5 +12,5 @@
         "riscv_encoding.h": "c",
         "riscv-ops.h": "c"
     },
-    "python.pythonPath": "/bin/python3"
+    "python.pythonPath": "C:\\Users\\hushi\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"
 }
