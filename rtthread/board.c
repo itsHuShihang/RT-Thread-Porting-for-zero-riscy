@@ -9,15 +9,15 @@
  * 2018-11-12     Ernest Chen  modify copyright
  */
 #include <stdint-gcc.h>
-#include "rthw.h"
+#include "include/rthw.h"
 //#include "gd32vf103.h"  //change to pulpino.h
 //#include "riscv_encoding.h"  //maybe useless
-#include "pulpino.h"
-#include "riscv-ops.h"
-#include "int.h"
-#include "event.h"
-#include "timer.h"
-#include "interrupt.h"
+#include "../pulpino/file_s/pulpino.h"
+#include "libcpu/risc-v/riscv-ops.h"
+#include "../pulpino/file_c/int.h"
+#include "../pulpino/file_c/event.h"
+#include "../pulpino/file_c/timer.h"
+#include "libcpu/risc-v/interrupt.h"
 
 
 // TMR is timer. I can find the address about timer in timer.h from line 31.

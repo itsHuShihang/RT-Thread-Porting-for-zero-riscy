@@ -14,8 +14,8 @@
  * 2011-06-26     Bernard      add rt_tick_set function.
  */
 
-#include "rthw.h"
-#include "rtthread.h"
+#include "../include/rthw.h"
+#include "../include/rtthread.h"
 
 static rt_tick_t rt_tick = 0;
 

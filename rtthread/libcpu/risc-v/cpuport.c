@@ -8,8 +8,8 @@
  * 2018/10/28     Bernard      The unify RISC-V porting code.
  */
 
-#include "rthw.h"
-#include "rtthread.h"
+#include "../../include/rthw.h"
+#include "../../include/rtthread.h"
 
 #include "cpuport.h"
 

@@ -15,8 +15,8 @@
  * 2018-07-14     armink       add idle hook list
  */
 
-#include "rthw.h"
-#include "rtthread.h"
+#include "../include/rthw.h"
+#include "../include/rtthread.h"
 
 #ifdef RT_USING_MODULE
 #include "dlmodule.h"

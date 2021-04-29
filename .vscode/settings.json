@@ -10,7 +10,12 @@
         "system_gd32vf103.h": "c",
         "int.h": "c",
         "riscv_encoding.h": "c",
-        "riscv-ops.h": "c"
+        "riscv-ops.h": "c",
+        "timer.h": "c",
+        "interrupt.h": "c",
+        "event.h": "c",
+        "rtdebug.h": "c",
+        "rtconfig.h": "c"
     },
-    "python.pythonPath": "C:\\Users\\hushi\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"
+    "python.pythonPath": "/usr/bin/python"
 }

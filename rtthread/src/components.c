@@ -16,8 +16,8 @@
  * 2015-07-29     Arda.Fu      Add support to use RT_USING_USER_MAIN with IAR
  */
 
-#include "rthw.h"
-#include "rtthread.h"
+#include "../include/rthw.h"
+#include "../include/rtthread.h"
 
 #ifdef RT_USING_USER_MAIN
 #ifndef RT_MAIN_THREAD_STACK_SIZE

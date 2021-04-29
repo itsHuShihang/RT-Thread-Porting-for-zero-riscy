@@ -9,12 +9,12 @@
  */
 
 #include <stdint.h>
-#include "rthw.h"
-#include "event.h"
-#include "int.h"
+#include "../../include/rthw.h"
+#include "../../../pulpino/file_c/event.h"
+#include "../../../pulpino/file_c/int.h"
 
 typedef void (*irq_handler_t)(void);
-extern irq_handler_t isrTable[];
+extern irq_handler_t isrTable[32];
 
 void SystemIrqHandler(uint32_t mcause)
 {
