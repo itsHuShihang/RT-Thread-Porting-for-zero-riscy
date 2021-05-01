@@ -20,7 +20,6 @@
 #include "libcpu/risc-v/interrupt.h"
 
 
-// TMR is timer. I can find the address about timer in timer.h from line 31.
 // need to change the address of these definition
 #define TMR_MSIP 0xFFC
 #define TMR_MSIP_size   0x4
