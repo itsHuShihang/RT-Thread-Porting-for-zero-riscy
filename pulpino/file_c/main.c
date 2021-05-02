@@ -203,6 +203,7 @@ void ISR_SRAM (void)
 
 #include "stdlib.h"
 #include "gpio.h"
+#include "../../rtthread/include/rtthread.h"
 // #include "uart.h"
 
 void main()

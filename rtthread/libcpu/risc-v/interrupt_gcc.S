@@ -10,7 +10,7 @@
 
 #include "cpuport.h"
 
-#define EXCEPTION_STACK_SIZE 96
+#define EXCEPTION_STACK_SIZE 128
 
   .section      .text.entry
   .align 2
@@ -41,7 +41,7 @@ IRQ_Handler:
 
     /* switch to interrupt stack */
     // la：将某个内存中存的地址加载到寄存器中
-    la    sp, __stack
+    la    sp, _stack
 
     /* interrupt handle */
     call  rt_interrupt_enter
@@ -102,22 +102,3 @@ spurious_interrupt:
 
     addi  sp, sp, EXCEPTION_STACK_SIZE
     mret
-
-  // external interrupts are handled by the same callback
-  // until compiler supports IRQ routines
-  .org 0x00
-  jal x0, reset_handler
-  .rept 21
-  nop                       // unused
-  .endr
-
-  jal x0, IRQ_Handler    // 22: sram
-  jal x0, IRQ_Handler    // 23: i2c
-  jal x0, IRQ_Handler    // 24: uart
-  jal x0, IRQ_Handler    // 25: gpio
-  jal x0, IRQ_Handler    // 26: spim end of transmission
-  jal x0, IRQ_Handler    // 27: spim R/T finished
-  jal x0, IRQ_Handler    // 28: timer A overflow
-  jal x0, IRQ_Handler    // 29: timer A compare
-  jal x0, IRQ_Handler    // 30: timer B overflow
-  jal x0, IRQ_Handler    // 31: timer B compare
