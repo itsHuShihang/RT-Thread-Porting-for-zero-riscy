@@ -40,27 +40,27 @@ def C2I():
         if(len(tmp) == 1):
             pass
         elif(tmp[1].lower() == 'c'):
-            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/pulpino_i/' + tmp[0] + '.i ' + './pulpino/file_c/' + file_pulpino)
             print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/pulpino_i/' + tmp[0] + '.i ' + './pulpino/file_c/' + file_pulpino)
+            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/pulpino_i/' + tmp[0] + '.i ' + './pulpino/file_c/' + file_pulpino)
 
     for file_rtthread_cpu in files_rtthread_cpu:
         tmp = file_rtthread_cpu.split('.')
         if(len(tmp) == 1):
             pass
         elif(tmp[1].lower() == 'c'):
-            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/rtthread_i/' + tmp[0] + '.i ' + './rtthread/libcpu/risc-v/' + file_rtthread_cpu)
             print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/rtthread_i/' + tmp[0] + '.i ' + './rtthread/libcpu/risc-v/' + file_rtthread_cpu)
+            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/rtthread_i/' + tmp[0] + '.i ' + './rtthread/libcpu/risc-v/' + file_rtthread_cpu)
 
     for file_rtthread_src in files_rtthread_src:
         tmp = file_rtthread_src.split('.')
         if(len(tmp) == 1):
             pass
         elif(tmp[1].lower() == 'c'):
-            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/rtthread_i/' + tmp[0] + '.i ' + './rtthread/src/' + file_rtthread_src)
             print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/rtthread_i/' + tmp[0] + '.i ' + './rtthread/src/' + file_rtthread_src)
+            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ' + './file_i/rtthread_i/' + tmp[0] + '.i ' + './rtthread/src/' + file_rtthread_src)
 
-    os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ./file_i/rtthread_i/board.i ./rtthread/board.c')
     print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ./file_i/rtthread_i/board.i ./rtthread/board.c')
+    os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -E -o ./file_i/rtthread_i/board.i ./rtthread/board.c')
 
 def I2S():
     print('**********I2S**********')
@@ -99,16 +99,16 @@ def I2S():
         if(len(tmp) == 1):
             pass
         elif(tmp[1].lower() == 'i'):
-            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -S -o ' + './file_s/pulpino_s/' + tmp[0] + '.s ' + './file_i/pulpino_i/' + file_pulpino)
             print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -S -o ' + './file_s/pulpino_s/' + tmp[0] + '.s ' + './file_i/pulpino_i/' + file_pulpino)
+            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -S -o ' + './file_s/pulpino_s/' + tmp[0] + '.s ' + './file_i/pulpino_i/' + file_pulpino)
 
     for file_rtthread in files_rtthread:
         tmp = file_rtthread.split('.')
         if(len(tmp) == 1):
             pass
         elif(tmp[1].lower() == 'i'):
-            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -S -o ' + './file_s/rtthread_s/' + tmp[0] + '.s ' + './file_i/rtthread_i/' + file_rtthread)
             print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -S -o ' + './file_s/rtthread_s/' + tmp[0] + '.s ' + './file_i/rtthread_i/' + file_rtthread)
+            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -S -o ' + './file_s/rtthread_s/' + tmp[0] + '.s ' + './file_i/rtthread_i/' + file_rtthread)
 
 def S2O():
     print('**********S2O**********')
@@ -141,20 +141,20 @@ def S2O():
         if(len(tmp) == 1):
             pass
         elif(tmp[1].lower() == 's'):
-            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ' + './file_o/pulpino_o/' + tmp[0] + '.o ' + './file_s/pulpino_s/' + file_pulpino)
             print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ' + './file_o/pulpino_o/' + tmp[0] + '.o ' + './file_s/pulpino_s/' + file_pulpino)
+            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ' + './file_o/pulpino_o/' + tmp[0] + '.o ' + './file_s/pulpino_s/' + file_pulpino)
 
     for file_rtthread in files_rtthread:
         tmp = file_rtthread.split('.')
         if(len(tmp) == 1):
             pass
         elif(tmp[1].lower() == 's'):
-            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ' + './file_o/rtthread_o/' + tmp[0] + '.o ' + './file_s/rtthread_s/' + file_rtthread)
             print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ' + './file_o/rtthread_o/' + tmp[0] + '.o ' + './file_s/rtthread_s/' + file_rtthread)
-    os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ./file_o/rtthread_o/context_gcc.o ./rtthread/libcpu/risc-v/context_gcc.S')
+            os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ' + './file_o/rtthread_o/' + tmp[0] + '.o ' + './file_s/rtthread_s/' + file_rtthread)
     print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ./file_o/rtthread_o/context_gcc.o ./rtthread/libcpu/risc-v/context_gcc.S')
-    os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ./file_o/rtthread_o/interrupt_gcc.o ./rtthread/libcpu/risc-v/interrupt_gcc.S')
+    os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ./file_o/rtthread_o/context_gcc.o ./rtthread/libcpu/risc-v/context_gcc.S')
     print('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ./file_o/rtthread_o/interrupt_gcc.o ./rtthread/libcpu/risc-v/interrupt_gcc.S')
+    os.system('riscv32-unknown-elf-gcc -march=rv32gc -mabi=ilp32 -c -o ./file_o/rtthread_o/interrupt_gcc.o ./rtthread/libcpu/risc-v/interrupt_gcc.S')
 
 def Ld():
     cmd = 'riscv32-unknown-elf-ld -T link.ld '
@@ -192,8 +192,8 @@ I2S()
 S2O()
 Ld()
 print('**********final process**********')
-os.system('riscv32-unknown-elf-objdump -D hello > obj.s')
-os.system('python hex2hex2.py')
 print('riscv32-unknown-elf-objdump -D hello > obj.s')
+os.system('riscv32-unknown-elf-objdump -D hello > obj.s')
 print('python hex2hex2.py')
+os.system('python hex2hex2.py')
 print('Done!')

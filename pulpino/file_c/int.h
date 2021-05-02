@@ -92,7 +92,7 @@ void ISR_TA_CMP (void); // 29: timer A compare
 void ISR_TB_OVR (void); // 30: timer B overflow
 void ISR_TB_CMP (void); // 31: timer B compare
 
-typedef void (*irq_handler_t)(void);
-irq_handler_t isrTable[32];
+// typedef void (*irq_handler_t)(void);
+// irq_handler_t isrTable[32];
 
 #endif // _INT_H_

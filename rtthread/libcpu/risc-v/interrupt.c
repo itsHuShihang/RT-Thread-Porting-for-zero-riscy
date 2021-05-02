@@ -15,7 +15,7 @@
 #include "../../../pulpino/file_c/int.h"
 
 typedef void (*irq_handler_t)(void);
-extern irq_handler_t isrTable[];
+irq_handler_t isrTable[32];
 
 void SystemIrqHandler(uint32_t mcause)
 {
