@@ -181,10 +181,10 @@ def Ld():
     
     cmd = cmd + 'libgcc.a libc.a -o hello'
     print('**********link**********')
-    os.system(cmd)
     print(cmd)
-    os.system('riscv32-unknown-elf-objcopy -O ihex hello helloworld.hex')
+    os.system(cmd)
     print('riscv32-unknown-elf-objcopy -O ihex hello helloworld.hex')
+    os.system('riscv32-unknown-elf-objcopy -O ihex hello helloworld.hex')
 
 
 C2I()
