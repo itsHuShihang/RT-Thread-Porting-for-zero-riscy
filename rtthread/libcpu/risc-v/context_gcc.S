@@ -158,7 +158,7 @@ rt_hw_context_switch_exit:
 
     csrr  t0, mhartid
     /* switch interrupt stack of current cpu */
-    la    sp, __stack_start__
+    la    sp, _stack_start
     addi  t1, t0, 1
     li    t2, __STACKSIZE__
     mul   t1, t1, t2

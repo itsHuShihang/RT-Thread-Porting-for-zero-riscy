@@ -18,6 +18,7 @@
 
 #include "../include/rthw.h"
 #include "../include/rtthread.h"
+#include  "../../pulpino/file_c/gpio.h"
 
 #ifdef RT_USING_USER_MAIN
 #ifndef RT_MAIN_THREAD_STACK_SIZE
@@ -211,7 +212,8 @@ void rt_application_init(void)
 int rtthread_startup(void)
 {
     rt_hw_interrupt_disable();
-
+    set_gpio_pin_direction(0, 1);//////////////////////////////////////
+    set_gpio_pin_value(0, 1);
     /* board level initialization
      * NOTE: please initialize heap inside board initialization.
      */
