@@ -1,4 +1,5 @@
-/*#include "sram.h"
+/*
+#include "sram.h"
 #include "stdlib.h"
 #include "gpio.h"
 #include "uart.h"
@@ -59,7 +60,7 @@ void main()
     // #endif
  	}
 
-	/* divide sys clock by 4 
+	// divide sys clock by 4
 	*(volatile int*) (SPI_REG_CLKDIV) = 0x4;
 
 	// if (check_spi_flash()) {
@@ -206,6 +207,12 @@ void ISR_SRAM (void)
 #include "../../rtthread/include/rtthread.h"
 // #include "uart.h"
 
+
+/**
+ * \brief This is main function.
+ * \param void
+ * \return 0
+*/
 int main(void)
 {
 	
