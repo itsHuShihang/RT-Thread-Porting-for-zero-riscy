@@ -34,6 +34,22 @@
 #define TMR_REG(offset)         _REG32(TMR_CTRL_ADDR, offset)
 #define TMR_FREQ                ((uint32_t)SystemCoreClock)  //units HZ
 
+/* This is the timer interrupt service routine. */
+void ISR_TA_CMP(void)
+{
+    set_gpio_pin_direction(5, 1);//////////////////////////////////////
+    set_gpio_pin_value(5, 1);
+    /* clear value */
+    reset_timer();
+
+    /* enter interrupt */
+    rt_interrupt_enter();
+    /* tick increase */
+    rt_tick_increase();
+    /* leave interrupt */
+    rt_interrupt_leave();
+}
+
 void riscv_clock_init(void)
 {
     //useless in zero-riscy
@@ -81,42 +97,22 @@ RT_WEAK void *rt_heap_end_get(void)
  */
 void rt_hw_board_init()
 {
-    set_gpio_pin_direction(1, 1);//////////////////////////////////////
-    set_gpio_pin_value(1, 1);
+    set_gpio_pin_direction(2, 1);//////////////////////////////////////
+    set_gpio_pin_value(2, 1);
     /* system clock Configuration */
     riscv_clock_init();
 
     /* OS Tick Configuration */
     ostick_config(TMR_FREQ / RT_TICK_PER_SECOND);
-    set_gpio_pin_direction(2, 1);//////////////////////////////////////
-    set_gpio_pin_value(2, 1);
     /* Call components board initial (use INIT_BOARD_EXPORT()) */
 #ifdef RT_USING_COMPONENTS_INIT
     rt_components_board_init();
 #endif
-    set_gpio_pin_direction(3, 1);//////////////////////////////////////
-    set_gpio_pin_value(3, 1);
 //使用宏定义选择是否打开内存堆功能，默认不打开，比较小巧
 //开启则可以使用可以使用动态内存功能，如使用 rt_malloc、rt_free 以及各种系统动态创建对象的 API
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
     rt_system_heap_init(rt_heap_begin_get(), rt_heap_end_get());
 #endif
-    set_gpio_pin_direction(4, 1);//////////////////////////////////////
-    set_gpio_pin_value(4, 1);
-}
-
-/* This is the timer interrupt service routine. */
-void ISR_TA_CMP(void)
-{
-    set_gpio_pin_direction(5, 1);//////////////////////////////////////
-    set_gpio_pin_value(5, 1);
-    /* clear value */
-    reset_timer();
-
-    /* enter interrupt */
-    rt_interrupt_enter();
-    /* tick increase */
-    rt_tick_increase();
-    /* leave interrupt */
-    rt_interrupt_leave();
+    set_gpio_pin_direction(3, 1);//////////////////////////////////////
+    set_gpio_pin_value(3, 1);
 }

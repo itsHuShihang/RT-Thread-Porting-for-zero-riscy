@@ -157,6 +157,8 @@ extern int main(void);
 /* Add -eentry to arm-none-eabi-gcc argument */
 int entry(void)
 {
+    set_gpio_pin_direction(0, 1);//////////////////////////////////////
+    set_gpio_pin_value(0, 1);
     rtthread_startup();
     return 0;
 }
@@ -212,8 +214,8 @@ void rt_application_init(void)
 int rtthread_startup(void)
 {
     rt_hw_interrupt_disable();
-    set_gpio_pin_direction(0, 1);//////////////////////////////////////
-    set_gpio_pin_value(0, 1);
+    set_gpio_pin_direction(1, 1);//////////////////////////////////////
+    set_gpio_pin_value(1, 1);
     /* board level initialization
      * NOTE: please initialize heap inside board initialization.
      */

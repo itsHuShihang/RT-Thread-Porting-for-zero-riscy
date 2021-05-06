@@ -224,14 +224,14 @@ int main(void)
 
 	//uart_set_cfg(0, 77);  //Core clock 12MHz, baud rate 9600 bps
 	
-	// unsigned int j = 0;
+	unsigned int j = 0;
 	
-	// while(1)
-	// {
-	// 	set_gpio_pin_value((j - 1) & 0x07, 1);
-	// 	set_gpio_pin_value(j & 0x07, 0);
-	// 	for(int i = 0; i < 1000000; ++i);
-	// 	j++;
-	// }
+	while(1)
+	{
+		set_gpio_pin_value((j - 1) & 0x07, 1);
+		set_gpio_pin_value(j & 0x07, 0);
+		for(int i = 0; i < 1000000; ++i);
+		j++;
+	}
 	return 0;
 }

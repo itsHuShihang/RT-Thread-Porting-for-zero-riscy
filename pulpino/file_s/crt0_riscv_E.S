@@ -67,7 +67,7 @@ main_entry:
   /* jump to main program entry point (argc = argv = 0) */
   addi x10, x0, 0
   addi x11, x0, 0
-  jal x1, main_thread_entry    //jal to entry instead of main
+  jal x1, entry    //jal to entry instead of main
   mv s0, a0
   jal  uart_wait_tx_done;
   mv a0, s0
@@ -148,21 +148,18 @@ _fini:
   jal x0, IRQ_Handler    // 23: i2c
   jal x0, IRQ_Handler    // 24: uart
   jal x0, IRQ_Handler    // 25: gpio
-  jal x0, IRQ_Handler    // 26: spim end of transmission
+  jal x0, IRQ_Handler    // 26: spim end of transmissionecall_insn_handler
   jal x0, IRQ_Handler    // 27: spim R/T finished
   jal x0, IRQ_Handler    // 28: timer A overflow
   jal x0, IRQ_Handler    // 29: timer A compare
   jal x0, IRQ_Handler    // 30: timer B overflow
-  jal x0, IRQ_Handler    // 31: timer B compare
-
-// reset vector
-  .org 0x80
-  jal x0, reset_handler
-
+  jal x0, IRQ_Handler    // 31: timer B compareecall_insn_handler
   // illegal instruction exception
   .org 0x84
+  //jal x0, illegal_insn_handler
   jal x0, illegal_insn_handler
 
   // ecall handler
   .org 0x88
-  jal x0, ecall_insn_handler
+  //jal x0, ecall_insn_handler
+  jal x0, main
