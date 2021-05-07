@@ -5,7 +5,7 @@ MEMORY
 {
     instrram    : ORIGIN = 0x00000000, LENGTH = 0x90000
     dataram     : ORIGIN = 0x00100000, LENGTH = 0x3000
-    stack       : ORIGIN = 0x00103000, LENGTH = 0x1000
+    stack       : ORIGIN = 0x00103000, LENGTH = 0x3000
 }
 
 /* Stack information variables */
