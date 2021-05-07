@@ -18,6 +18,7 @@ else:
     clrstr = "clear"
     sername = "/dev/ttyUSB0"
     filelocation = "/home/hushihang/Documents/MyRT-Thread/ext_mem.dat"
+    os.system("sudo chmod 777 /dev/ttyUSB0")
 
 ser = serial.Serial(sername, 115200, timeout = 0.001)
 
