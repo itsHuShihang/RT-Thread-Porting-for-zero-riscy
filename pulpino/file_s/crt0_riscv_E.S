@@ -161,5 +161,4 @@ _fini:
 
   // ecall handler
   .org 0x88
-  //jal x0, ecall_insn_handler
-  jal x0, main
+  jal x0, ecall_insn_handler

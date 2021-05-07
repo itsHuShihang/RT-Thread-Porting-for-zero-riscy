@@ -20,22 +20,19 @@ IRQ_Handler:
     /* save all from thread context */
     addi sp, sp, -EXCEPTION_STACK_SIZE
 
-    STORE x1,   1 * REGBYTES(sp)
-    li    t0,   0x80 // t0 is x5
-    STORE t0,   2 * REGBYTES(sp)
+    sw  x1, 0x5C(sp)
 
-    STORE x4,   4 * REGBYTES(sp)
-    STORE x5,   5 * REGBYTES(sp)
-    STORE x6,   6 * REGBYTES(sp)
-    STORE x7,   7 * REGBYTES(sp)
-    STORE x8,   8 * REGBYTES(sp)
-    STORE x9,   9 * REGBYTES(sp)
-    STORE x10, 10 * REGBYTES(sp)
-    STORE x11, 11 * REGBYTES(sp)
-    STORE x12, 12 * REGBYTES(sp)
-    STORE x13, 13 * REGBYTES(sp)
-    STORE x14, 14 * REGBYTES(sp)
-    STORE x15, 15 * REGBYTES(sp)
+    sw  x3, 0x00(sp)  // gp
+    sw  x4, 0x04(sp)  // tp
+    sw  x5, 0x08(sp)  // t0
+    sw  x6, 0x0c(sp)  // t1
+    sw  x7, 0x10(sp)  // t2
+    sw x10, 0x14(sp)  // a0
+    sw x11, 0x18(sp)  // a1
+    sw x12, 0x1c(sp)  // a2
+    sw x13, 0x20(sp)  // a3
+    sw x14, 0x24(sp)  // a4
+    sw x15, 0x28(sp)  // a5
 
     move  s0, sp
 
@@ -78,7 +75,7 @@ IRQ_Handler:
     csrw  mepc, a0
 
 spurious_interrupt:
-    LOAD  x1,   1 * REGBYTES(sp)
+    LOAD  x1,  1 * REGBYTES(sp)
 
     /* Remain in M-mode after mret */
     li    t0, 0x00001800
@@ -87,18 +84,18 @@ spurious_interrupt:
     LOAD  t0,   2 * REGBYTES(sp)
     csrs  mstatus, t0 
 
-    LOAD  x4,   4 * REGBYTES(sp)
-    LOAD  x5,   5 * REGBYTES(sp)
-    LOAD  x6,   6 * REGBYTES(sp)
-    LOAD  x7,   7 * REGBYTES(sp)
-    LOAD  x8,   8 * REGBYTES(sp)
-    LOAD  x9,   9 * REGBYTES(sp)
-    LOAD  x10, 10 * REGBYTES(sp)
-    LOAD  x11, 11 * REGBYTES(sp)
-    LOAD  x12, 12 * REGBYTES(sp)
-    LOAD  x13, 13 * REGBYTES(sp)
-    LOAD  x14, 14 * REGBYTES(sp)
-    LOAD  x15, 15 * REGBYTES(sp)
+    lw  x3, 0x00(sp)
+    lw  x4, 0x04(sp)
+    lw  x5, 0x08(sp)
+    lw  x6, 0x0c(sp)
+    lw  x7, 0x10(sp)
+    lw x10, 0x14(sp)
+    lw x11, 0x18(sp)
+    lw x12, 0x1c(sp)
+    lw x13, 0x20(sp)
+    lw x14, 0x24(sp)
+    lw x15, 0x28(sp)
+    lw  x1, 0x5C(sp)
 
-    addi  sp, sp, EXCEPTION_STACK_SIZE
+    addi sp, sp, EXCEPTION_STACK_SIZE
     mret
