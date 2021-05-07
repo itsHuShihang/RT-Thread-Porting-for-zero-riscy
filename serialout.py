@@ -10,15 +10,18 @@ import time
 import os
 import sys
 
+usb_location = "/dev/ttyUSB1"
+
 if(sys.platform[0] == 'w'):
     clrstr = "cls"
     sername = "COM1"
     filelocation = "G:/flash_read_write/ext_mem.dat"
 else:
     clrstr = "clear"
-    sername = "/dev/ttyUSB0"
+    sername = usb_location
     filelocation = "/home/hushihang/Documents/MyRT-Thread/ext_mem.dat"
-    os.system("sudo chmod 777 /dev/ttyUSB0")
+    os.system("ls /dev/ttyUSB*")
+    os.system("sudo chmod 777 " + usb_location)
 
 ser = serial.Serial(sername, 115200, timeout = 0.001)
 
