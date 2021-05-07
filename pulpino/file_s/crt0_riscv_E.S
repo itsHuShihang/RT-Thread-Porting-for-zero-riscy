@@ -154,6 +154,11 @@ _fini:
   jal x0, IRQ_Handler    // 29: timer A compare
   jal x0, IRQ_Handler    // 30: timer B overflow
   jal x0, IRQ_Handler    // 31: timer B compareecall_insn_handler
+
+  // reset vector
+  .org 0x80
+  jal x0, reset_handler
+
   // illegal instruction exception
   .org 0x84
   //jal x0, illegal_insn_handler
