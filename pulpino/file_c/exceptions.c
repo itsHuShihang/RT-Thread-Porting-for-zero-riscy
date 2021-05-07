@@ -11,7 +11,7 @@
 #include "spr-defs.h"
 #include "string_lib.h"
 #include "utils.h"
-
+#include "gpio.h"
 // use weak attribute here, so we can overwrite this function to provide custom exception handlers, e.g. for tests
 __attribute__((interrupt)) __attribute__((weak))
 void default_exception_handler_c(void)
@@ -29,5 +29,8 @@ void illegal_insn_handler_c(void)
 __attribute__((interrupt)) __attribute__((weak))
 void ecall_insn_handler_c(void)
 {
-  for(;;);
+  set_gpio_pin_direction(5, 1);
+  set_gpio_pin_value(5, 1);
+  for (;;)
+    ;
 }

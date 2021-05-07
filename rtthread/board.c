@@ -37,8 +37,6 @@
 /* This is the timer interrupt service routine. */
 void ISR_TA_CMP(void)
 {
-    set_gpio_pin_direction(5, 1);//////////////////////////////////////
-    set_gpio_pin_value(5, 1);
     /* clear value */
     reset_timer();
 
@@ -97,8 +95,8 @@ RT_WEAK void *rt_heap_end_get(void)
  */
 void rt_hw_board_init()
 {
-    set_gpio_pin_direction(2, 1);//////////////////////////////////////
-    set_gpio_pin_value(2, 1);
+    set_gpio_pin_direction(4, 1);//////////////////////////////////////
+    set_gpio_pin_value(4, 1);
     /* system clock Configuration */
     riscv_clock_init();
 
@@ -113,6 +111,4 @@ void rt_hw_board_init()
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
     rt_system_heap_init(rt_heap_begin_get(), rt_heap_end_get());
 #endif
-    set_gpio_pin_direction(3, 1);//////////////////////////////////////
-    set_gpio_pin_value(3, 1);
 }

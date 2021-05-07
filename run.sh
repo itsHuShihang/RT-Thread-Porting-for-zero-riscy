@@ -1,3 +1,2 @@
-#!/desktop/run_compile
 python test.py
-python create_mif_16.py
+python3 ~/Documents/pulpino_project/uart_to_mem/serialout.py

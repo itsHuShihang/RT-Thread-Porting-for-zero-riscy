@@ -3,9 +3,9 @@ __DYNAMIC  =  0;
 
 MEMORY
 {
-    instrram    : ORIGIN = 0x00000000, LENGTH = 0x90000
-    dataram     : ORIGIN = 0x00100000, LENGTH = 0x3000
-    stack       : ORIGIN = 0x00103000, LENGTH = 0x3000
+    instrram    : ORIGIN = 0x00000000, LENGTH = 0x8000
+    dataram     : ORIGIN = 0x00100000, LENGTH = 0x6000
+    stack       : ORIGIN = 0x00106000, LENGTH = 0x2000
 }
 
 /* Stack information variables */
@@ -53,7 +53,7 @@ SECTIONS
       PROVIDE_HIDDEN (__preinit_array_start = .);
       KEEP (*(.preinit_array))
       PROVIDE_HIDDEN (__preinit_array_end = .);
-    } > instrram /*dataram*/
+    } > dataram
 
     .init_array     :
     {
@@ -61,7 +61,7 @@ SECTIONS
       KEEP (*(SORT(.init_array.*)))
       KEEP (*(.init_array ))
       PROVIDE_HIDDEN (__init_array_end = .);
-    } > instrram /*dataram*/
+    } > dataram
 
     .fini_array     :
     {
@@ -69,19 +69,19 @@ SECTIONS
       KEEP (*(SORT(.fini_array.*)))
       KEEP (*(.fini_array ))
       PROVIDE_HIDDEN (__fini_array_end = .);
-    } > instrram /*dataram*/
+    } > dataram
 
     .rodata : {
         . = ALIGN(4);
         *(.rodata);
         *(.rodata.*)
-    } > instrram /*dataram*/
+    } > dataram
 
     .shbss :
     {
         . = ALIGN(4);
         *(.shbss)
-    } > instrram /*dataram*/
+    } > dataram
 
     .data : {
         . = ALIGN(4);
@@ -91,7 +91,7 @@ SECTIONS
         *(.data.*)
         edata  =  .;
         _edata  =  .;
-    } > instrram /*dataram*/
+    } > dataram
 
     .bss :
     {
@@ -103,7 +103,7 @@ SECTIONS
         *(.sbss.*)
         *(COMMON)
         _bss_end = .;
-    } > instrram /*dataram*/
+    } > dataram
 
     /* ensure there is enough room for stack */
     .stack (NOLOAD): {
@@ -112,7 +112,7 @@ SECTIONS
         . = ALIGN(4);
         stack = . ;
         _stack = . ;
-    } > instrram /*stack*/
+    } > stack
 
     .stab  0 (NOLOAD) :
     {
@@ -128,6 +128,6 @@ SECTIONS
     {
         . = ALIGN(4);
         _end = .;
-    } > instrram /*dataram*/
+    } > dataram
 }
 
