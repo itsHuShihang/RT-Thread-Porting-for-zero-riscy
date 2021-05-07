@@ -95,20 +95,21 @@ RT_WEAK void *rt_heap_end_get(void)
  */
 void rt_hw_board_init()
 {
-    set_gpio_pin_direction(4, 1);//////////////////////////////////////
-    set_gpio_pin_value(4, 1);
     /* system clock Configuration */
     riscv_clock_init();
+    set_gpio_pin_value(2, 1);//monitor
 
     /* OS Tick Configuration */
     ostick_config(TMR_FREQ / RT_TICK_PER_SECOND);
+    set_gpio_pin_value(3, 1);//monitor
     /* Call components board initial (use INIT_BOARD_EXPORT()) */
 #ifdef RT_USING_COMPONENTS_INIT
     rt_components_board_init();
 #endif
+    set_gpio_pin_value(4, 1);//monitor
 //使用宏定义选择是否打开内存堆功能，默认不打开，比较小巧
 //开启则可以使用可以使用动态内存功能，如使用 rt_malloc、rt_free 以及各种系统动态创建对象的 API
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
     rt_system_heap_init(rt_heap_begin_get(), rt_heap_end_get());
 #endif
-}
+    set_gpio_pin_value(5, 1);//monitor

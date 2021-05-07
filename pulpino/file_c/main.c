@@ -174,7 +174,7 @@ void ISR_SRAM (void)
 		SCFR = (SCFR & (0xFFFFF000)) | tbl;//write tbl
 
 	}
-	else//monitor
+	else
 	{
 		if(abs(err_cur - err_pre) * 100 < 3 * err_cur)
 		{

@@ -162,9 +162,7 @@ int entry(void)
         set_gpio_pin_direction(i, 1);
         set_gpio_pin_value(i, 0);
     }
-
-    set_gpio_pin_direction(0, 1);//////////////////////////////////////
-    set_gpio_pin_value(0, 1);
+    set_gpio_pin_value(0, 1);//monitor
     rtthread_startup();
     return 0;
 }
@@ -219,13 +217,8 @@ void rt_application_init(void)
 
 int rtthread_startup(void)
 {
-    set_gpio_pin_direction(1, 1);//////////////////////////////////////
-    set_gpio_pin_value(1, 1);
     rt_hw_interrupt_disable();
-    set_gpio_pin_direction(2, 1);//////////////////////////////////////
-    set_gpio_pin_value(2, 1);
-    set_gpio_pin_direction(3, 1);//////////////////////////////////////
-    set_gpio_pin_value(3, 1);
+    set_gpio_pin_value(1, 1);//monitor
     /* board level initialization
      * NOTE: please initialize heap inside board initialization.
      */
