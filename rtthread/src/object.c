@@ -228,8 +228,7 @@ rt_object_get_information(enum rt_object_class_type type)
 RTM_EXPORT(rt_object_get_information);
 
 /**
- * This function will initialize an object and add it to object system
- * management.
+ * This function will initialize an object and add it to object system management.
  *
  * @param object the specified object to be initialized.
  * @param type the object type.
@@ -245,7 +244,6 @@ void rt_object_init(struct rt_object         *object,
 #ifdef RT_USING_MODULE
     struct rt_dlmodule *module = dlmodule_self();
 #endif
-
     /* get object information */
     information = rt_object_get_information(type);
     RT_ASSERT(information != RT_NULL);
@@ -254,16 +252,29 @@ void rt_object_init(struct rt_object         *object,
 
     /* enter critical */
     rt_enter_critical();
+    int hsh = 0;
     /* try to find object */
     for (node  = information->object_list.next;
             node != &(information->object_list);
             node  = node->next)
     {
         struct rt_object *obj;
+        for (int j = 0; j < 100000;j++);
+        if (hsh == 1)
+        {
+            hsh = 0;
+            }
+            else
+            {
+                hsh = 1;
+            }
+
+        set_gpio_pin_value(3, hsh);//monitor
 
         obj = rt_list_entry(node, struct rt_object, list);
         RT_ASSERT(obj != object);
     }
+
     /* leave critical */
     rt_exit_critical();
 

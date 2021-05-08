@@ -30,7 +30,7 @@
 #define TMR_MTIME_size 0x8
 
 //#define TMR_CTRL_ADDR           0xd1000000
-#define SystemCoreClock 12000000  //units Hz
+#define SystemCoreClock 24000000  //units Hz
 #define TMR_REG(offset)         _REG32(TMR_CTRL_ADDR, offset)
 #define TMR_FREQ                ((uint32_t)SystemCoreClock)  //units HZ
 
@@ -77,8 +77,8 @@ static void ostick_config(rt_uint32_t ticks)
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
 
 //可以更改 RT_HEAP_SIZE 的大小，至少大于各个动态申请内存大小之和，但要小于芯片 RAM 总大小
-#define RT_HEAP_SIZE 4096// 16k
-static uint32_t rt_heap[RT_HEAP_SIZE];  // heap default size: 16K(4096 * 4)  total 32k
+#define RT_HEAP_SIZE 2048// 2k
+static uint32_t rt_heap[RT_HEAP_SIZE];  // heap default size: 8K(2048 * 4)  total 32k
 RT_WEAK void *rt_heap_begin_get(void)
 {
     return rt_heap;
@@ -97,19 +97,17 @@ void rt_hw_board_init()
 {
     /* system clock Configuration */
     riscv_clock_init();
-    set_gpio_pin_value(2, 1);//monitor
-
+    
     /* OS Tick Configuration */
     ostick_config(TMR_FREQ / RT_TICK_PER_SECOND);
-    set_gpio_pin_value(3, 1);//monitor
     /* Call components board initial (use INIT_BOARD_EXPORT()) */
 #ifdef RT_USING_COMPONENTS_INIT
     rt_components_board_init();
 #endif
-    set_gpio_pin_value(4, 1);//monitor
+
 //使用宏定义选择是否打开内存堆功能，默认不打开，比较小巧
 //开启则可以使用可以使用动态内存功能，如使用 rt_malloc、rt_free 以及各种系统动态创建对象的 API
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
     rt_system_heap_init(rt_heap_begin_get(), rt_heap_end_get());
 #endif
-    set_gpio_pin_value(5, 1);//monitor
+}

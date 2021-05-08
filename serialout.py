@@ -10,7 +10,7 @@ import time
 import os
 import sys
 
-usb_location = "/dev/ttyUSB1"
+usb_location = "/dev/ttyUSB0"
 
 if(sys.platform[0] == 'w'):
     clrstr = "cls"

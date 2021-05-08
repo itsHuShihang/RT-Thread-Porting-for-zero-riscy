@@ -16,9 +16,17 @@
  * 2015-07-29     Arda.Fu      Add support to use RT_USING_USER_MAIN with IAR
  */
 
+#include "stdlib.h"
 #include "../include/rthw.h"
 #include "../include/rtthread.h"
-#include  "../../pulpino/file_c/gpio.h"
+#include "../../pulpino/file_c/gpio.h"
+#include "../../pulpino/file_c/spr-defs.h"
+#include "../../pulpino/file_c/utils.h"
+#include "../../pulpino/file_c/pulpino.h"
+#include "../../pulpino/file_c/uart.h"
+#include "../../pulpino/file_c/string_lib.h"
+#include "../../pulpino/file_c/utils.h"
+#include "../../pulpino/file_c/spi.h"
 
 #ifdef RT_USING_USER_MAIN
 #ifndef RT_MAIN_THREAD_STACK_SIZE
@@ -157,12 +165,6 @@ extern int main(void);
 /* Add -eentry to arm-none-eabi-gcc argument */
 int entry(void)
 {
-    for (int i = 0; i < 8; i++)
-    {
-        set_gpio_pin_direction(i, 1);
-        set_gpio_pin_value(i, 0);
-    }
-    set_gpio_pin_value(0, 1);//monitor
     rtthread_startup();
     return 0;
 }
@@ -207,7 +209,7 @@ void rt_application_init(void)
     result = rt_thread_init(tid, "main", main_thread_entry, RT_NULL,
                             main_stack, sizeof(main_stack), RT_MAIN_THREAD_PRIORITY, 20);
     RT_ASSERT(result == RT_EOK);
-	
+    set_gpio_pin_value(0, 1);//monitor
     /* if not define RT_USING_HEAP, using to eliminate the warning */
     (void)result;
 #endif
@@ -217,8 +219,16 @@ void rt_application_init(void)
 
 int rtthread_startup(void)
 {
+    for (int i = 0; i < 8; i++)
+    {
+        set_gpio_pin_direction(i, 1);
+        set_gpio_pin_value(i, 0);
+    }
+    // uart_set_cfg(0, 12);
+    // while(uart_getchar() != 'q');
+    // printf("test\n");
+
     rt_hw_interrupt_disable();
-    set_gpio_pin_value(1, 1);//monitor
     /* board level initialization
      * NOTE: please initialize heap inside board initialization.
      */

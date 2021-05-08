@@ -210,7 +210,6 @@ void rt_system_heap_init(void *begin_addr, void *end_addr)
 
         return;
     }
-
     /* point to begin address of heap */
     heap_ptr = (rt_uint8_t *)begin_align;
 
@@ -223,22 +222,23 @@ void rt_system_heap_init(void *begin_addr, void *end_addr)
     mem->next  = mem_size_aligned + SIZEOF_STRUCT_MEM;
     mem->prev  = 0;
     mem->used  = 0;
+
 #ifdef RT_USING_MEMTRACE
     rt_mem_setname(mem, "INIT");
 #endif
-
     /* initialize the end of the heap */
     heap_end        = (struct heap_mem *)&heap_ptr[mem->next];
     heap_end->magic = HEAP_MAGIC;
     heap_end->used  = 1;
     heap_end->next  = mem_size_aligned + SIZEOF_STRUCT_MEM;
     heap_end->prev  = mem_size_aligned + SIZEOF_STRUCT_MEM;
+
 #ifdef RT_USING_MEMTRACE
     rt_mem_setname(heap_end, "INIT");
 #endif
-
+    set_gpio_pin_value(1, 1);//monitor
     rt_sem_init(&heap_sem, "heap", 1, RT_IPC_FLAG_FIFO);
-
+    set_gpio_pin_value(7, 1);//monitor
     /* initialize the lowest-free pointer to the start of the heap */
     lfree = (struct heap_mem *)heap_ptr;
 }

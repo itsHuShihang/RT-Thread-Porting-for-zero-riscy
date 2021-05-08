@@ -23,6 +23,7 @@
 #include "rtdef.h"
 #include "rtservice.h"
 #include "rtm.h"
+#include "../../pulpino/file_c/gpio.h"
 
 #ifdef __cplusplus
 extern "C" {
