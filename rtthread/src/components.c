@@ -224,9 +224,9 @@ int rtthread_startup(void)
         set_gpio_pin_direction(i, 1);
         set_gpio_pin_value(i, 0);
     }
-    // uart_set_cfg(0, 12);
-    // while(uart_getchar() != 'q');
-    // printf("test\n");
+    uart_set_cfg(0, 12);
+    while(uart_getchar() != 'q');
+    printf("test\n");
 
     rt_hw_interrupt_disable();
     /* board level initialization
