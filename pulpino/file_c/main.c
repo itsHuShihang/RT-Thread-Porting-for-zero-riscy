@@ -202,13 +202,7 @@ void ISR_SRAM (void)
 	}
 }*/
 
-#include "stdlib.h"
-#include "gpio.h"
-#include "pulpino.h"
-#include "string_lib.h"
-#include "stdint.h"
-#include "uart.h"
-#include <stdarg.h>
+
 #include "../../rtthread/include/rtthread.h"
 
 
@@ -219,22 +213,36 @@ void ISR_SRAM (void)
 */
 int main(void)
 {
-	printf("This is my main function");
+	printf("This is my main function\n");
+	// ECP = 0xFFFFFFFF;
+    // ICP = 0xFFFFFFFF;
+	// reset_timer();
+	//start_timer();
+	//printf("1\n");
 	for (int i = 0; i < 8; i++)
 	{
 		set_gpio_pin_direction(i, 1);
 		set_gpio_pin_value(i, 0);
 	}
-	
+	//printf("2\n");
+
 	unsigned int j = 0;
-	
+	//printf("3\n");
 	while(1)
 	{
+		//printf("4\n");
 		set_gpio_pin_value((j - 1) & 0x07, 1);
 		set_gpio_pin_value(j & 0x07, 0);
+		//printf("5\n");
 		for(int i = 0; i < 1000000; ++i);
+		//printf("6\n");
 		//rt_thread_mdelay(500);
 		j++;
+		//printf("7\n");
+		printf("tick value: %d\n", rt_tick_get());
+		printf("nest value: %d\n", rt_interrupt_get_nest());
+		//printf("9\n");
 	}
+	//printf("10\n");
 	return 0;
 }

@@ -11,7 +11,7 @@
 #ifndef LIBC_ERRNO_H__
 #define LIBC_ERRNO_H__
 
-#include "rtconfig.h"
+#include "../../rtconfig.h"
 
 #if defined(RT_USING_NEWLIB) || defined(_WIN32)
 /* use errno.h file in toolchains */

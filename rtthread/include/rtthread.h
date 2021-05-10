@@ -18,22 +18,33 @@
 #ifndef __RT_THREAD_H__
 #define __RT_THREAD_H__
 
+/*standart c library*/
+#include <stdlib.h>
+#include <stdarg.h>
+
+/*rt-thread head files*/
 #include "../rtconfig.h"
+#include "rtdbg.h"
 #include "rtdebug.h"
 #include "rtdef.h"
-#include "rtservice.h"
+#include "rthw.h"
+// #include "rtlibc.h"
 #include "rtm.h"
-#include "stdlib.h"
-#include "../include/rthw.h"
-#include "../include/rtthread.h"
+#include "rtservice.h"
+
+/*pulpino head files*/
+#include "../../pulpino/file_c/event.h"
 #include "../../pulpino/file_c/gpio.h"
-#include "../../pulpino/file_c/spr-defs.h"
-#include "../../pulpino/file_c/utils.h"
+#include "../../pulpino/file_c/int.h"
 #include "../../pulpino/file_c/pulpino.h"
-#include "../../pulpino/file_c/uart.h"
-#include "../../pulpino/file_c/string_lib.h"
-#include "../../pulpino/file_c/utils.h"
 #include "../../pulpino/file_c/spi.h"
+#include "../../pulpino/file_c/spr-defs.h"
+#include "../../pulpino/file_c/sram.h"
+#include "../../pulpino/file_c/string_lib.h"
+#include "../../pulpino/file_c/timer.h"
+#include "../../pulpino/file_c/uart.h"
+#include "../../pulpino/file_c/utils.h"
+
 
 #ifdef __cplusplus
 extern "C" {

@@ -27,6 +27,7 @@
 #include "../../pulpino/file_c/string_lib.h"
 #include "../../pulpino/file_c/utils.h"
 #include "../../pulpino/file_c/spi.h"
+#include "../../pulpino/file_c/timer.h"
 
 #ifdef RT_USING_USER_MAIN
 #ifndef RT_MAIN_THREAD_STACK_SIZE

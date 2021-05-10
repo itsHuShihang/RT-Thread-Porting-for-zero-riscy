@@ -30,7 +30,6 @@ void SystemIrqHandler(uint32_t mcause)
         ICP = (1U << intNum);
 
         /* Now call the real irq handler for intNum */
-        printf("SystemIrqHandler entry!/n");//monitor
         isrTable[intNum]();
     }
 }

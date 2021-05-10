@@ -22,30 +22,32 @@
 
 
 // need to change the address of these definition
-#define TMR_MSIP 0xFFC
-#define TMR_MSIP_size   0x4
-//#define TMR_MTIMECMP 0x8
-#define TMR_MTIMECMP_size 0x8
-#define TMR_MTIME 0x0
-#define TMR_MTIME_size 0x8
+// #define TMR_MSIP 0xFFC
+// #define TMR_MSIP_size   0x4
+// #define TMR_MTIMECMP 0x8
+// #define TMR_MTIMECMP_size 0x8
+// #define TMR_MTIME 0x0
+// #define TMR_MTIME_size 0x8
 
 //#define TMR_CTRL_ADDR           0xd1000000
 #define SystemCoreClock 24000000  //units Hz
-#define TMR_REG(offset)         _REG32(TMR_CTRL_ADDR, offset)
+//#define TMR_REG(offset)         _REG32(TMR_CTRL_ADDR, offset)
 #define TMR_FREQ                ((uint32_t)SystemCoreClock)  //units HZ
 
 /* This is the timer interrupt service routine. */
 void ISR_TA_CMP(void)
 {
+    printf("ISR_TA_CMP entry!\n");//monitor
     /* clear value */
     reset_timer();
 
     /* enter interrupt */
-    rt_interrupt_enter();
+    //rt_interrupt_enter();
     /* tick increase */
     rt_tick_increase();
     /* leave interrupt */
-    rt_interrupt_leave();
+    //rt_interrupt_leave();
+    printf("ISR_TA_CMP leave!\n");//monitor
 }
 
 void riscv_clock_init(void)
@@ -63,12 +65,18 @@ void riscv_clock_init(void)
 
 static void ostick_config(rt_uint32_t ticks)
 {
+    /* interrupt initialization */
+    //clear event pending and interrupt pending
+    ECP = 0xFFFFFFFF;
+    ICP = 0xFFFFFFFF;
+
     /* set interrupt handler of timer compare */
     SystemIrqHandler_set(ISR_TA_CMP, 29);
     /* set value */
-    *(rt_uint64_t *)(TOCRA) = ticks;
+    //*(rt_uint64_t *)(TOCRA) = ticks;
+    TOCRA = ticks;
     /* enable timer A compare interrupt */
-    IER = 1 << 29;
+    IER = 1 << 29 | 1 << 28;
     int_enable();
     /* clear timer value */
     reset_timer();
@@ -96,9 +104,9 @@ RT_WEAK void *rt_heap_end_get(void)
 void rt_hw_board_init()
 {
     printf("board init, start\n");//monitor
-    /* system clock Configuration */
-    riscv_clock_init();
-    printf("clock init, done\n");//monitor
+    /* system clock configuration is not necessary for pulpino*/
+    //riscv_clock_init();
+
     /* OS Tick Configuration */
     ostick_config(TMR_FREQ / RT_TICK_PER_SECOND);
     printf("ostick config, done\n");//monitor

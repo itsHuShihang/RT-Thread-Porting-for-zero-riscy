@@ -63,8 +63,3 @@ void rt_hw_interrupt_enable(rt_base_t level);
 *ATTENTION:* RI5CY core use LPIT0 while zero-riscy core use LPIT1.
 
 In zero-riscy core, has a LPIT1(low power periodic interval timer) module to implement a system tick with channel 0. If you want to know more details about it, you can find information in files called *system_RV32M1_zero_riscy.h* and *system_RV32M1_zero_riscy.c*. Every channel in LPIT1 has a 32bit timer for countdown. And when counting to 0, an interrupt flag will be setted to high level. Find more information in [this website](https://blog.csdn.net/whik1194/article/details/94066432).
-
-
-
-显示PC指针是1228,但是不管怎么改handler都是1228`
-`rt_hw_board_init()`函数调用失效,但是我觉得就是进1228的原因
