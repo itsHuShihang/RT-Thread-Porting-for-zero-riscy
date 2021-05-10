@@ -88,7 +88,7 @@ void rt_thread_exit(void)
 
     /* disable interrupt */
     level = rt_hw_interrupt_disable();
-    printf("interrupt disable, start\n");//monitor
+
     /* remove from schedule */
     rt_schedule_remove_thread(thread);
     /* change stat */

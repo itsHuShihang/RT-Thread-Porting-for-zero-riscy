@@ -220,14 +220,9 @@ void rt_application_init(void)
 
 int rtthread_startup(void)
 {
-    for (int i = 0; i < 8; i++)
-    {
-        set_gpio_pin_direction(i, 1);
-        set_gpio_pin_value(i, 0);
-    }
     uart_set_cfg(0, 12);
     while(uart_getchar() != 'q');
-    printf("Test begin!\n");
+    printf("rt-thread start...\n");
 
     rt_hw_interrupt_disable();
     printf("interrupt disable, done\n");//monitor

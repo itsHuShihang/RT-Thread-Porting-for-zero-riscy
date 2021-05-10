@@ -225,8 +225,6 @@ int main(void)
 		set_gpio_pin_direction(i, 1);
 		set_gpio_pin_value(i, 0);
 	}
-
-	//uart_set_cfg(0, 77);  //Core clock 12MHz, baud rate 9600 bps
 	
 	unsigned int j = 0;
 	
@@ -235,6 +233,7 @@ int main(void)
 		set_gpio_pin_value((j - 1) & 0x07, 1);
 		set_gpio_pin_value(j & 0x07, 0);
 		for(int i = 0; i < 1000000; ++i);
+		//rt_thread_mdelay(500);
 		j++;
 	}
 	return 0;

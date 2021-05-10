@@ -98,10 +98,10 @@ void rt_hw_board_init()
     printf("board init, start\n");//monitor
     /* system clock Configuration */
     riscv_clock_init();
-
+    printf("clock init, done\n");//monitor
     /* OS Tick Configuration */
     ostick_config(TMR_FREQ / RT_TICK_PER_SECOND);
-
+    printf("ostick config, done\n");//monitor
     /* Call components board initial (use INIT_BOARD_EXPORT()) */
 #ifdef RT_USING_COMPONENTS_INIT
     rt_components_board_init();
