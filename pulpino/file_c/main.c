@@ -204,8 +204,12 @@ void ISR_SRAM (void)
 
 #include "stdlib.h"
 #include "gpio.h"
+#include "pulpino.h"
+#include "string_lib.h"
+#include "stdint.h"
+#include "uart.h"
+#include <stdarg.h>
 #include "../../rtthread/include/rtthread.h"
-// #include "uart.h"
 
 
 /**
@@ -215,11 +219,11 @@ void ISR_SRAM (void)
 */
 int main(void)
 {
-	
-	for(int i = 0; i < 8; i++)
+	printf("This is my main function");
+	for (int i = 0; i < 8; i++)
 	{
 		set_gpio_pin_direction(i, 1);
-		set_gpio_pin_value(i, 1);
+		set_gpio_pin_value(i, 0);
 	}
 
 	//uart_set_cfg(0, 77);  //Core clock 12MHz, baud rate 9600 bps

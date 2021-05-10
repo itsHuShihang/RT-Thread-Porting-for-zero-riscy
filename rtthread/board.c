@@ -97,17 +97,20 @@ void rt_hw_board_init()
 {
     /* system clock Configuration */
     riscv_clock_init();
-    
+    printf("clock init, done!\n");//monitor
     /* OS Tick Configuration */
     ostick_config(TMR_FREQ / RT_TICK_PER_SECOND);
+    printf("ostick config, done!\n");//monitor
     /* Call components board initial (use INIT_BOARD_EXPORT()) */
 #ifdef RT_USING_COMPONENTS_INIT
     rt_components_board_init();
+    printf("components board init, done!\n");//monitor
 #endif
 
 //使用宏定义选择是否打开内存堆功能，默认不打开，比较小巧
 //开启则可以使用可以使用动态内存功能，如使用 rt_malloc、rt_free 以及各种系统动态创建对象的 API
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
     rt_system_heap_init(rt_heap_begin_get(), rt_heap_end_get());
+    printf("system heap init, done!\n");//monitor
 #endif
 }

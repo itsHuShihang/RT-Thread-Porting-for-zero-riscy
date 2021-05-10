@@ -10,6 +10,7 @@
 
 #include <stdint.h>
 #include "interrupt.h"
+#include "../../include/rtthread.h"
 #include "../../include/rthw.h"
 #include "../../../pulpino/file_c/event.h"
 #include "../../../pulpino/file_c/int.h"
@@ -29,6 +30,7 @@ void SystemIrqHandler(uint32_t mcause)
         ICP = (1U << intNum);
 
         /* Now call the real irq handler for intNum */
+        printf("SystemIrqHandler entry!/n");//monitor
         isrTable[intNum]();
     }
 }

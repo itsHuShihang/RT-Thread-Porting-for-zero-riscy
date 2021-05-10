@@ -23,7 +23,17 @@
 #include "rtdef.h"
 #include "rtservice.h"
 #include "rtm.h"
+#include "stdlib.h"
+#include "../include/rthw.h"
+#include "../include/rtthread.h"
 #include "../../pulpino/file_c/gpio.h"
+#include "../../pulpino/file_c/spr-defs.h"
+#include "../../pulpino/file_c/utils.h"
+#include "../../pulpino/file_c/pulpino.h"
+#include "../../pulpino/file_c/uart.h"
+#include "../../pulpino/file_c/string_lib.h"
+#include "../../pulpino/file_c/utils.h"
+#include "../../pulpino/file_c/spi.h"
 
 #ifdef __cplusplus
 extern "C" {

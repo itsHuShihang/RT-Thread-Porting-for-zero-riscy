@@ -16,7 +16,8 @@
         "event.h": "c",
         "rtdebug.h": "c",
         "rtconfig.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "cstdio": "c"
     },
     "python.pythonPath": "/usr/bin/python3"
 }
