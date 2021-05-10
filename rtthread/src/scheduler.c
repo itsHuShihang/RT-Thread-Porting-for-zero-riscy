@@ -117,6 +117,7 @@ static void _rt_scheduler_stack_check(struct rt_thread *thread)
  */
 void rt_system_scheduler_init(void)
 {
+    printf("system scheduler init, start\n");//monitor
     register rt_base_t offset;
 
     rt_scheduler_lock_nest = 0;
@@ -151,6 +152,7 @@ void rt_system_scheduler_init(void)
  */
 void rt_system_scheduler_start(void)
 {
+    printf("system scheduler start\n");//monitor
     register struct rt_thread *to_thread;
     register rt_ubase_t highest_ready_priority;
 
