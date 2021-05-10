@@ -209,7 +209,7 @@ void rt_application_init(void)
     result = rt_thread_init(tid, "main", main_thread_entry, RT_NULL,
                             main_stack, sizeof(main_stack), RT_MAIN_THREAD_PRIORITY, 20);
     RT_ASSERT(result == RT_EOK);
-    set_gpio_pin_value(0, 1);//monitor
+
     /* if not define RT_USING_HEAP, using to eliminate the warning */
     (void)result;
 #endif

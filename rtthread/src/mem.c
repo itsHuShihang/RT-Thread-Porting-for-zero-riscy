@@ -236,9 +236,9 @@ void rt_system_heap_init(void *begin_addr, void *end_addr)
 #ifdef RT_USING_MEMTRACE
     rt_mem_setname(heap_end, "INIT");
 #endif
-    set_gpio_pin_value(1, 1);//monitor
+
     rt_sem_init(&heap_sem, "heap", 1, RT_IPC_FLAG_FIFO);
-    set_gpio_pin_value(7, 1);//monitor
+
     /* initialize the lowest-free pointer to the start of the heap */
     lfree = (struct heap_mem *)heap_ptr;
 }

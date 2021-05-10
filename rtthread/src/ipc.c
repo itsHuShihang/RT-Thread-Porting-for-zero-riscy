@@ -204,10 +204,8 @@ rt_err_t rt_sem_init(rt_sem_t    sem,
 
     /* init object */
     rt_object_init(&(sem->parent.parent), RT_Object_Class_Semaphore, name);
-    set_gpio_pin_value(5, 1);//monitor
     /* init ipc object */
     rt_ipc_object_init(&(sem->parent));
-    set_gpio_pin_value(6, 1);//monitor
     /* set init value */
     sem->value = (rt_uint16_t)value;
 
