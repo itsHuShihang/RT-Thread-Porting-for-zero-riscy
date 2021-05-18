@@ -37,17 +37,17 @@
 /* This is the timer interrupt service routine. */
 void ISR_TA_CMP(void)
 {
-    printf("ISR_TA_CMP entry!\n");//monitor
     /* clear value */
-    reset_timer();
+    //reset_timer();
+    ICP = 1 << 29;
 
     /* enter interrupt */
     //rt_interrupt_enter();
     /* tick increase */
     rt_tick_increase();
+    printf("tick:%d\n", rt_tick_get());
     /* leave interrupt */
     //rt_interrupt_leave();
-    printf("ISR_TA_CMP leave!\n");//monitor
 }
 
 void riscv_clock_init(void)

@@ -213,47 +213,32 @@ void ISR_SRAM (void)
 // int main(void)
 // {
 // 	printf("This is my main function\n");
-// 	printf("thread name is %s\n",rt_thread_self()->name);
-// 	printf("thread init priority is %d\n",rt_thread_self()->init_priority);
-// 	printf("thread current priority is %d\n",rt_thread_self()->current_priority);
-
-
-// 	// ECP = 0xFFFFFFFF;
-//     // ICP = 0xFFFFFFFF;
-// 	// reset_timer();
-// 	//start_timer();
-// 	//printf("1\n");
 // 	for (int i = 0; i < 8; i++)
 // 	{
 // 		set_gpio_pin_direction(i, 1);
 // 		set_gpio_pin_value(i, 0);
 // 	}
-// 	//printf("2\n");
 
-// 	unsigned int j = 0;
-// 	//printf("3\n");
-// 	while(1)
+// 	ECP = 0xFFFFFFFF;
+// 	ICP = 0xFFFFFFFF;
+// 	start_timer();
+
+// 	int j = 0;
+// 	while (1)
 // 	{
-// 		//printf("4\n");
-// 		set_gpio_pin_value((j - 1) & 0x07, 1);
-// 		set_gpio_pin_value(j & 0x07, 0);
-// 		//printf("5\n");
-// 		for(int i = 0; i < 1000000; ++i);
-// 		//printf("6\n");
-// 		//rt_thread_mdelay(500);
-// 		j++;
-// 		//printf("7\n");
-// 		// printf("tick value: %d\n", rt_tick_get());
-// 		// printf("nest value: %d\n", rt_interrupt_get_nest());
-// 		//printf("9\n");
+// 		sleep();
+// 		// set_gpio_pin_value(j + 1, 1);
+// 		// set_gpio_pin_value(j, 0);
+// 		// j++;
+// 		// j = j % 8;
+// 		// rt_thread_delay(100);
 // 	}
-// 	//printf("10\n");
 // 	return 0;
 // }
 
 #define THREAD_PRIORITY         3
 #define THREAD_STACK_SIZE       512
-#define THREAD_TIMESLICE        5
+#define THREAD_TIMESLICE        8
 
 static rt_thread_t tid1 = RT_NULL;
 
@@ -329,20 +314,38 @@ int thread_sample(void)
 }
 
 
+// int main(void)
+// {
+// 	printf("This is my main function\n");
+// 	printf("\nthread name is %s\n",rt_thread_self()->name);
+// 	printf("thread init priority is %d\n",rt_thread_self()->init_priority);
+// 	printf("thread current priority is %d\n",rt_thread_self()->current_priority);
+
+// 	thread_sample();
+// 	rt_thread_yield();
+
+// 	printf("\nwelcome back to main function\n");
+// 	printf("thread name is %s\n",rt_thread_self()->name);
+// 	printf("thread init priority is %d\n",rt_thread_self()->init_priority);
+// 	printf("thread current priority is %d\n",rt_thread_self()->current_priority);
+
+// 	return 0;
+// }
+
 int main(void)
 {
 	printf("This is my main function\n");
-	printf("\nthread name is %s\n",rt_thread_self()->name);
-	printf("thread init priority is %d\n",rt_thread_self()->init_priority);
-	printf("thread current priority is %d\n",rt_thread_self()->current_priority);
+	for (int i = 0; i < 8; i++)
+	{
+		set_gpio_pin_direction(i, 1);
+		set_gpio_pin_value(i, 0);
+	}
+
+	ECP = 0xFFFFFFFF;
+	ICP = 0xFFFFFFFF;
+	//start_timer();
 
 	thread_sample();
-	rt_thread_yield();
-
-	printf("\nwelcome back to main function\n");
-	printf("thread name is %s\n",rt_thread_self()->name);
-	printf("thread init priority is %d\n",rt_thread_self()->init_priority);
-	printf("thread current priority is %d\n",rt_thread_self()->current_priority);
 
 	return 0;
 }
