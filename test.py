@@ -157,7 +157,7 @@ def S2O():
     os.system('riscv32-unknown-elf-gcc -march=rv32imc -mabi=ilp32 -c -o ./file_o/rtthread_o/interrupt_gcc.o ./rtthread/libcpu/risc-v/interrupt_gcc.S')
 
 def Ld():
-    cmd = 'riscv32-unknown-elf-ld -T link.ld '
+    cmd = 'riscv32-unknown-elf-ld -T link.ld -Map rtthread.map '
 
     path_pulpino = dir_C + '/file_o/pulpino_o'
     path_rtthread = dir_C + '/file_o/rtthread_o'

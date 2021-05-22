@@ -1,0 +1,564 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+instrram         0x0000000000000000 0x0000000000008000
+dataram          0x0000000000100000 0x0000000000005000
+stack            0x0000000000105000 0x0000000000003000
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+                0x0000000000000000                __DYNAMIC = 0x0
+                0x0000000000001000                _min_stack = 0x1000
+                0x0000000000003000                _stack_len = LENGTH (stack)
+                0x0000000000108000                _stack_start = (ORIGIN (stack) + LENGTH (stack))
+
+.vectors        0x0000000000000000       0x8c
+                0x0000000000000000                . = ALIGN (0x4)
+ *(.vectors)
+ .vectors       0x0000000000000000       0x8c ./file_o/pulpino_o/crt0_riscv_E.o
+
+.text           0x000000000000008c     0x62dc
+                0x000000000000008c                . = ALIGN (0x4)
+                0x000000000000008c                _stext = .
+ *(.text)
+ .text          0x000000000000008c       0x5a ./file_o/pulpino_o/timer.o
+                0x000000000000008c                reset_timer
+                0x00000000000000a2                start_timer
+                0x00000000000000ba                stop_timer
+                0x00000000000000d2                get_time
+ .text          0x00000000000000e6      0x19e ./file_o/pulpino_o/utils.o
+                0x00000000000000e6                exit
+                0x00000000000000fa                eoc
+                0x000000000000013c                sleep_busy
+                0x000000000000016e                cpu_perf_set
+                0x0000000000000194                cpu_perf_get
+ .text          0x0000000000000284       0xc4 ./file_o/pulpino_o/crt0_riscv_E.o
+                0x00000000000002b0                _start
+                0x0000000000000346                _init
+                0x0000000000000346                _fini
+ .text          0x0000000000000348      0x25c ./file_o/pulpino_o/main.o
+                0x00000000000004b0                thread_sample
+                0x0000000000000542                main
+ .text          0x00000000000005a4      0x89c ./file_o/pulpino_o/qprintf.o
+                0x0000000000000676                putchar
+                0x0000000000000bce                printf
+                0x0000000000000c1e                puts
+                0x0000000000000c6e                strcmp
+                0x0000000000000d4e                memset
+                0x0000000000000d9e                strcpy
+                0x0000000000000df8                strlen
+ .text          0x0000000000000e40      0x2dc ./file_o/pulpino_o/gpio.o
+                0x0000000000000e40                set_pin_function
+                0x0000000000000e98                get_pin_function
+                0x0000000000000eca                set_gpio_pin_direction
+                0x0000000000000f28                get_gpio_pin_direction
+                0x0000000000000f5c                set_gpio_pin_value
+                0x0000000000000fbe                get_gpio_pin_value
+                0x0000000000000ff2                set_gpio_pin_irq_en
+                0x0000000000001054                set_gpio_pin_irq_type
+                0x0000000000001106                get_gpio_irq_status
+ .text          0x000000000000111c      0x2d8 ./file_o/pulpino_o/spi.o
+                0x000000000000111c                spi_setup_slave
+                0x000000000000114c                spi_setup_master
+                0x00000000000011b8                spi_setup_cmd_addr
+                0x0000000000001228                spi_setup_dummy
+                0x000000000000125c                spi_set_datalen
+                0x00000000000012a0                spi_start_transaction
+                0x00000000000012e2                spi_get_status
+                0x00000000000012fe                spi_write_fifo
+                0x0000000000001378                spi_read_fifo
+ .text          0x00000000000013f4       0x44 ./file_o/pulpino_o/exceptions.o
+                0x00000000000013f4                default_exception_handler_c
+                0x00000000000013fc                illegal_insn_handler_c
+                0x0000000000001404                ecall_insn_handler_c
+ .text          0x0000000000001438       0x50 ./file_o/pulpino_o/int.o
+                0x0000000000001438                ISR_SRAM
+                0x0000000000001440                ISR_I2C
+                0x0000000000001448                ISR_UART
+                0x0000000000001450                ISR_GPIO
+                0x0000000000001458                ISR_SPIM0
+                0x0000000000001460                ISR_SPIM1
+                0x0000000000001468                ISR_TA_OVF
+                0x0000000000001478                ISR_TB_OVF
+                0x0000000000001480                ISR_TB_CMP
+ .text          0x0000000000001488      0x214 ./file_o/pulpino_o/uart.o
+                0x0000000000001488                uart_set_cfg
+                0x0000000000001514                uart_send
+                0x0000000000001586                uart_getchar
+                0x00000000000015b2                uart_sendchar
+                0x00000000000015e0                uart_wait_tx_done
+                0x0000000000001600                uart_mysendstring
+                0x000000000000165a                uart_getstring
+ .text          0x000000000000169c      0x754 ./file_o/rtthread_o/timer.o
+                0x000000000000188a                rt_timer_init
+                0x00000000000018d8                rt_timer_detach
+                0x000000000000190c                rt_timer_create
+                0x0000000000001966                rt_timer_delete
+                0x000000000000199c                rt_timer_start
+                0x0000000000001ba2                rt_timer_stop
+                0x0000000000001bf6                rt_timer_control
+                0x0000000000001c98                rt_timer_check
+                0x0000000000001d68                rt_timer_next_timeout_tick
+                0x0000000000001d86                rt_system_timer_init
+                0x0000000000001dd2                rt_system_timer_thread_init
+ .text          0x0000000000001df0      0x3e4 ./file_o/rtthread_o/object.o
+                0x0000000000001e76                rt_system_object_init
+                0x0000000000001e84                rt_object_get_information
+                0x0000000000001ee0                rt_object_init
+                0x0000000000001fd0                rt_object_detach
+                0x0000000000002008                rt_object_allocate
+                0x00000000000020a6                rt_object_delete
+                0x00000000000020e6                rt_object_is_systemobject
+                0x000000000000210e                rt_object_get_type
+                0x0000000000002130                rt_object_find
+ .text          0x00000000000021d4       0x92 ./file_o/rtthread_o/irq.o
+                0x00000000000021d4                rt_interrupt_enter
+                0x0000000000002210                rt_interrupt_leave
+                0x000000000000224c                rt_interrupt_get_nest
+ .text          0x0000000000002266        0x0 ./file_o/rtthread_o/cpu.o
+ .text          0x0000000000002266        0x0 ./file_o/rtthread_o/slab.o
+ .text          0x0000000000002266      0x208 ./file_o/rtthread_o/components.o
+                0x00000000000022a6                rt_components_board_init
+                0x00000000000022ea                rt_components_init
+                0x000000000000232e                entry
+                0x0000000000002344                main_thread_entry
+                0x0000000000002360                rt_application_init
+                0x00000000000023a6                rtthread_startup
+ .text          0x000000000000246e        0x0 ./file_o/rtthread_o/mempool.o
+ .text          0x000000000000246e      0x8a6 ./file_o/rtthread_o/mem.o
+                0x000000000000257c                rt_system_heap_init
+                0x00000000000026c6                rt_malloc
+                0x0000000000002962                rt_realloc
+                0x0000000000002b52                rt_calloc
+                0x0000000000002ba2                rt_free
+                0x0000000000002cbe                rt_memory_info
+ .text          0x0000000000002d14      0x8b0 ./file_o/rtthread_o/thread.o
+                0x0000000000002e04                rt_thread_exit
+                0x0000000000002fac                rt_thread_init
+                0x0000000000003014                rt_thread_self
+                0x000000000000302a                rt_thread_startup
+                0x0000000000003084                rt_thread_detach
+                0x000000000000310c                rt_thread_create
+                0x0000000000003196                rt_thread_delete
+                0x00000000000031fc                rt_thread_yield
+                0x0000000000003288                rt_thread_sleep
+                0x00000000000032fe                rt_thread_delay
+                0x000000000000331c                rt_thread_mdelay
+                0x0000000000003346                rt_thread_control
+                0x0000000000003428                rt_thread_suspend
+                0x00000000000034a2                rt_thread_resume
+                0x0000000000003500                rt_thread_timeout
+                0x000000000000353c                rt_thread_find
+ .text          0x00000000000035c4      0xe9e ./file_o/rtthread_o/ipc.o
+                0x00000000000037ac                rt_sem_init
+                0x0000000000003808                rt_sem_detach
+                0x0000000000003834                rt_sem_create
+                0x0000000000003898                rt_sem_delete
+                0x00000000000038c4                rt_sem_take
+                0x0000000000003994                rt_sem_trytake
+                0x00000000000039b4                rt_sem_release
+                0x0000000000003a20                rt_sem_control
+                0x0000000000003a8a                rt_event_init
+                0x0000000000003ad8                rt_event_detach
+                0x0000000000003b04                rt_event_create
+                0x0000000000003b5a                rt_event_delete
+                0x0000000000003b86                rt_event_send
+                0x0000000000003cb2                rt_event_recv
+                0x0000000000003e28                rt_event_control
+                0x0000000000003e80                rt_mb_init
+                0x0000000000003f12                rt_mb_detach
+                0x0000000000003f4a                rt_mb_create
+                0x0000000000004004                rt_mb_delete
+                0x000000000000404c                rt_mb_send_wait
+                0x000000000000420a                rt_mb_send
+                0x0000000000004232                rt_mb_recv
+                0x00000000000043ee                rt_mb_control
+ .text          0x0000000000004462        0x0 ./file_o/rtthread_o/memheap.o
+ .text          0x0000000000004462       0x7a ./file_o/rtthread_o/interrupt.o
+                0x0000000000004462                SystemIrqHandler
+                0x00000000000044b0                SystemIrqHandler_set
+ .text          0x00000000000044dc       0x84 ./file_o/rtthread_o/context_gcc.o
+                0x00000000000044dc                rt_hw_interrupt_disable
+                0x00000000000044e2                rt_hw_interrupt_enable
+                0x00000000000044e8                rt_hw_context_switch_to
+                0x00000000000044f4                rt_hw_context_switch
+                0x000000000000452a                rt_hw_context_switch_exit
+ .text          0x0000000000004560      0x116 ./file_o/rtthread_o/cpuport.o
+                0x0000000000004560                rt_hw_stack_init
+                0x0000000000004604                rt_hw_context_switch_interrupt
+                0x0000000000004646                rt_hw_cpu_shutdown
+ .text          0x0000000000004676      0x11a ./file_o/rtthread_o/clock.o
+                0x0000000000004676                rt_system_tick_init
+                0x0000000000004684                rt_tick_get
+                0x000000000000469a                rt_tick_set
+                0x00000000000046cc                rt_tick_increase
+                0x0000000000004726                rt_tick_from_millisecond
+ .text          0x0000000000004790      0x19c ./file_o/rtthread_o/idle.o
+                0x0000000000004804                rt_thread_idle_excute
+                0x00000000000048be                rt_thread_idle_init
+                0x0000000000004916                rt_thread_idle_gethandler
+ .text          0x000000000000492c     0x14be ./file_o/rtthread_o/kservice.o
+                0x000000000000492c                rt_get_errno
+                0x000000000000496e                rt_set_errno
+                0x00000000000049be                _rt_errno
+                0x0000000000004a02                rt_memset
+                0x0000000000004b24                rt_memcpy
+                0x0000000000004c7a                rt_memmove
+                0x0000000000004d46                rt_memcmp
+                0x0000000000004dc2                rt_strstr
+                0x0000000000004e3e                rt_strcasecmp
+                0x0000000000004ee2                rt_strncpy
+                0x0000000000004f70                rt_strncmp
+                0x0000000000004fde                rt_strcmp
+                0x000000000000503e                rt_strnlen
+                0x0000000000005094                rt_strlen
+                0x00000000000050d0                rt_strdup
+                0x000000000000511c                rt_show_version
+                0x00000000000054b0                rt_vsnprintf
+                0x0000000000005aee                rt_snprintf
+                0x0000000000005b48                rt_vsprintf
+                0x0000000000005b78                rt_sprintf
+                0x0000000000005bcc                rt_hw_console_output
+                0x0000000000005bde                rt_kputs
+                0x0000000000005c02                rt_kprintf
+                0x0000000000005c78                rt_malloc_align
+                0x0000000000005d18                rt_free_align
+                0x0000000000005d42                __rt_ffs
+ .text          0x0000000000005dea      0x414 ./file_o/rtthread_o/scheduler.o
+                0x0000000000005ec0                rt_system_scheduler_init
+                0x0000000000005f2c                rt_system_scheduler_start
+                0x0000000000005f84                rt_schedule
+                0x0000000000006050                rt_schedule_insert_thread
+                0x00000000000060d6                rt_schedule_remove_thread
+                0x0000000000006140                rt_enter_critical
+                0x000000000000617e                rt_exit_critical
+                0x00000000000061e4                rt_critical_level
+ .text          0x00000000000061fe      0x15a ./file_o/rtthread_o/board.o
+                0x0000000000006228                ISR_TA_CMP
+                0x000000000000625e                riscv_clock_init
+                0x00000000000062e0                rt_heap_begin_get
+                0x00000000000062f6                rt_heap_end_get
+                0x000000000000630c                rt_hw_board_init
+ .text          0x0000000000006358        0x0 ./file_o/rtthread_o/interrupt_gcc.o
+                0x0000000000006358                _etext = .
+                0x0000000000006358                __CTOR_LIST__ = .
+                0x0000000000006358        0x4 LONG 0x0 (((__CTOR_END__ - __CTOR_LIST__) / 0x4) - 0x2)
+ *(.ctors)
+                0x000000000000635c        0x4 LONG 0x0
+                0x0000000000006360                __CTOR_END__ = .
+                0x0000000000006360                __DTOR_LIST__ = .
+                0x0000000000006360        0x4 LONG 0x0 (((__DTOR_END__ - __DTOR_LIST__) / 0x4) - 0x2)
+ *(.dtors)
+                0x0000000000006364        0x4 LONG 0x0
+                0x0000000000006368                __DTOR_END__ = .
+ *(.lit)
+ *(.shdata)
+                0x0000000000006368                _endtext = .
+
+.text.entry     0x0000000000006368       0xaa
+ .text.entry    0x0000000000006368       0xaa ./file_o/rtthread_o/interrupt_gcc.o
+                0x0000000000006368                IRQ_Handler
+
+.preinit_array  0x0000000000100000        0x0
+                [!provide]                        PROVIDE (__preinit_array_start = .)
+ *(.preinit_array)
+                [!provide]                        PROVIDE (__preinit_array_end = .)
+
+.init_array     0x0000000000100000        0x0
+                [!provide]                        PROVIDE (__init_array_start = .)
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array)
+                [!provide]                        PROVIDE (__init_array_end = .)
+
+.fini_array     0x0000000000100000        0x0
+                [!provide]                        PROVIDE (__fini_array_start = .)
+ *(SORT_BY_NAME(.fini_array.*))
+ *(.fini_array)
+                [!provide]                        PROVIDE (__fini_array_end = .)
+
+.rodata         0x0000000000100000      0x62c
+                0x0000000000100000                . = ALIGN (0x4)
+ *(.rodata)
+ .rodata        0x0000000000100000       0x80 ./file_o/pulpino_o/utils.o
+ .rodata        0x0000000000100080       0xd1 ./file_o/pulpino_o/main.o
+ *fill*         0x0000000000100151        0x3 
+ .rodata        0x0000000000100154        0x7 ./file_o/pulpino_o/qprintf.o
+ *fill*         0x000000000010015b        0x1 
+ .rodata        0x000000000010015c       0x3c ./file_o/rtthread_o/timer.o
+ .rodata        0x0000000000100198      0x11c ./file_o/rtthread_o/components.o
+ .rodata        0x00000000001002b4       0x90 ./file_o/rtthread_o/mem.o
+ .rodata        0x0000000000100344        0xd ./file_o/rtthread_o/cpuport.o
+ *fill*         0x0000000000100351        0x3 
+ .rodata        0x0000000000100354       0x1e ./file_o/rtthread_o/idle.o
+ *fill*         0x0000000000100372        0x2 
+ .rodata        0x0000000000100374      0x249 ./file_o/rtthread_o/kservice.o
+                0x0000000000100498                __lowest_bit_bitmap
+ *fill*         0x00000000001005bd        0x3 
+ .rodata        0x00000000001005c0       0x37 ./file_o/rtthread_o/scheduler.o
+ *fill*         0x00000000001005f7        0x1 
+ .rodata        0x00000000001005f8       0x34 ./file_o/rtthread_o/board.o
+ *(.rodata.*)
+
+.rti_fn.0       0x000000000010062c        0x4
+ .rti_fn.0      0x000000000010062c        0x4 ./file_o/rtthread_o/components.o
+                0x000000000010062c                __rt_init_rti_start
+
+.rti_fn.0.end   0x0000000000100630        0x4
+ .rti_fn.0.end  0x0000000000100630        0x4 ./file_o/rtthread_o/components.o
+                0x0000000000100630                __rt_init_rti_board_start
+
+.rti_fn.1.end   0x0000000000100634        0x4
+ .rti_fn.1.end  0x0000000000100634        0x4 ./file_o/rtthread_o/components.o
+                0x0000000000100634                __rt_init_rti_board_end
+
+.rti_fn.6.end   0x0000000000100638        0x4
+ .rti_fn.6.end  0x0000000000100638        0x4 ./file_o/rtthread_o/components.o
+                0x0000000000100638                __rt_init_rti_end
+
+.rela.dyn       0x000000000010063c        0x0
+ .rela.text     0x000000000010063c        0x0 ./file_o/pulpino_o/utils.o
+ .rela.text.entry
+                0x000000000010063c        0x0 ./file_o/pulpino_o/utils.o
+
+.shbss          0x000000000010063c        0x0
+                0x000000000010063c                . = ALIGN (0x4)
+ *(.shbss)
+
+.data           0x000000000010063c       0x60
+                0x000000000010063c                . = ALIGN (0x4)
+                0x000000000010063c                sdata = .
+                0x000000000010063c                _sdata = .
+ *(.data)
+ .data          0x000000000010063c        0x0 ./file_o/pulpino_o/timer.o
+ .data          0x000000000010063c        0x0 ./file_o/pulpino_o/utils.o
+ .data          0x000000000010063c        0x0 ./file_o/pulpino_o/crt0_riscv_E.o
+ .data          0x000000000010063c        0x0 ./file_o/pulpino_o/main.o
+ .data          0x000000000010063c       0x10 ./file_o/pulpino_o/qprintf.o
+                0x000000000010063c                remu10_table
+ .data          0x000000000010064c        0x0 ./file_o/pulpino_o/gpio.o
+ .data          0x000000000010064c        0x0 ./file_o/pulpino_o/spi.o
+ .data          0x000000000010064c        0x0 ./file_o/pulpino_o/exceptions.o
+ .data          0x000000000010064c        0x0 ./file_o/pulpino_o/int.o
+ .data          0x000000000010064c        0x0 ./file_o/pulpino_o/uart.o
+ .data          0x000000000010064c        0x0 ./file_o/rtthread_o/timer.o
+ .data          0x000000000010064c       0x50 ./file_o/rtthread_o/object.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/irq.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/cpu.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/slab.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/components.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/mempool.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/mem.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/thread.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/ipc.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/memheap.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/interrupt.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/context_gcc.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/cpuport.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/clock.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/idle.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/kservice.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/scheduler.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/board.o
+ .data          0x000000000010069c        0x0 ./file_o/rtthread_o/interrupt_gcc.o
+ *(.data.*)
+                0x000000000010069c                edata = .
+                0x000000000010069c                _edata = .
+
+.bss            0x000000000010069c     0x27b8
+                0x000000000010069c                . = ALIGN (0x4)
+                0x000000000010069c                _bss_start = .
+ *(.bss)
+ .bss           0x000000000010069c        0x0 ./file_o/pulpino_o/timer.o
+ .bss           0x000000000010069c        0x0 ./file_o/pulpino_o/utils.o
+ .bss           0x000000000010069c        0x0 ./file_o/pulpino_o/crt0_riscv_E.o
+ .bss           0x000000000010069c      0x484 ./file_o/pulpino_o/main.o
+ .bss           0x0000000000100b20        0x0 ./file_o/pulpino_o/qprintf.o
+ .bss           0x0000000000100b20        0x0 ./file_o/pulpino_o/gpio.o
+ .bss           0x0000000000100b20        0x0 ./file_o/pulpino_o/spi.o
+ .bss           0x0000000000100b20        0x0 ./file_o/pulpino_o/exceptions.o
+ .bss           0x0000000000100b20        0x0 ./file_o/pulpino_o/int.o
+ .bss           0x0000000000100b20        0x0 ./file_o/pulpino_o/uart.o
+ .bss           0x0000000000100b20        0xc ./file_o/rtthread_o/timer.o
+ .bss           0x0000000000100b2c        0x0 ./file_o/rtthread_o/object.o
+ .bss           0x0000000000100b2c        0x0 ./file_o/rtthread_o/irq.o
+ .bss           0x0000000000100b2c        0x0 ./file_o/rtthread_o/cpu.o
+ .bss           0x0000000000100b2c        0x0 ./file_o/rtthread_o/slab.o
+ .bss           0x0000000000100b2c        0x0 ./file_o/rtthread_o/components.o
+ .bss           0x0000000000100b2c        0x0 ./file_o/rtthread_o/mempool.o
+ .bss           0x0000000000100b2c       0x38 ./file_o/rtthread_o/mem.o
+ .bss           0x0000000000100b64        0x0 ./file_o/rtthread_o/thread.o
+ .bss           0x0000000000100b64        0x0 ./file_o/rtthread_o/ipc.o
+ .bss           0x0000000000100b64        0x0 ./file_o/rtthread_o/memheap.o
+ .bss           0x0000000000100b64       0x80 ./file_o/rtthread_o/interrupt.o
+                0x0000000000100b64                isrTable
+ .bss           0x0000000000100be4        0x0 ./file_o/rtthread_o/context_gcc.o
+ .bss           0x0000000000100be4        0x0 ./file_o/rtthread_o/cpuport.o
+ .bss           0x0000000000100be4        0x4 ./file_o/rtthread_o/clock.o
+ .bss           0x0000000000100be8      0x180 ./file_o/rtthread_o/idle.o
+ .bss           0x0000000000100d68       0x84 ./file_o/rtthread_o/kservice.o
+ .bss           0x0000000000100dec       0x42 ./file_o/rtthread_o/scheduler.o
+                0x0000000000100dec                rt_thread_priority_table
+ *fill*         0x0000000000100e2e        0x2 
+ .bss           0x0000000000100e30     0x2000 ./file_o/rtthread_o/board.o
+ .bss           0x0000000000102e30        0x0 ./file_o/rtthread_o/interrupt_gcc.o
+ *(.bss.*)
+ *(.sbss)
+ .sbss          0x0000000000102e30        0x1 ./file_o/rtthread_o/irq.o
+                0x0000000000102e30                rt_interrupt_nest
+ *fill*         0x0000000000102e31        0x3 
+ .sbss          0x0000000000102e34        0xc ./file_o/rtthread_o/cpuport.o
+                0x0000000000102e34                rt_interrupt_from_thread
+                0x0000000000102e38                rt_interrupt_to_thread
+                0x0000000000102e3c                rt_thread_switch_interrupt_flag
+ .sbss          0x0000000000102e40       0x14 ./file_o/rtthread_o/scheduler.o
+                0x0000000000102e40                rt_current_thread
+                0x0000000000102e44                rt_current_priority
+                0x0000000000102e48                rt_thread_ready_priority_group
+                0x0000000000102e4c                rt_thread_defunct
+ *(.sbss.*)
+ *(COMMON)
+                0x0000000000102e54                _bss_end = .
+                0x0000000000102e54                . = ALIGN (0x4)
+                0x0000000000102e54                _end = .
+
+.stack          0x0000000000105000     0x1000
+                0x0000000000105000                . = ALIGN (0x4)
+                0x0000000000106000                . = (. + _min_stack)
+ *fill*         0x0000000000105000     0x1000 
+                0x0000000000106000                . = ALIGN (0x4)
+                0x0000000000106000                stack = .
+                0x0000000000106000                _stack = .
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+LOAD ./file_o/pulpino_o/timer.o
+LOAD ./file_o/pulpino_o/utils.o
+LOAD ./file_o/pulpino_o/crt0_riscv_E.o
+LOAD ./file_o/pulpino_o/main.o
+LOAD ./file_o/pulpino_o/qprintf.o
+LOAD ./file_o/pulpino_o/gpio.o
+LOAD ./file_o/pulpino_o/spi.o
+LOAD ./file_o/pulpino_o/exceptions.o
+LOAD ./file_o/pulpino_o/int.o
+LOAD ./file_o/pulpino_o/uart.o
+LOAD ./file_o/rtthread_o/timer.o
+LOAD ./file_o/rtthread_o/object.o
+LOAD ./file_o/rtthread_o/irq.o
+LOAD ./file_o/rtthread_o/cpu.o
+LOAD ./file_o/rtthread_o/slab.o
+LOAD ./file_o/rtthread_o/components.o
+LOAD ./file_o/rtthread_o/mempool.o
+LOAD ./file_o/rtthread_o/mem.o
+LOAD ./file_o/rtthread_o/thread.o
+LOAD ./file_o/rtthread_o/ipc.o
+LOAD ./file_o/rtthread_o/memheap.o
+LOAD ./file_o/rtthread_o/interrupt.o
+LOAD ./file_o/rtthread_o/context_gcc.o
+LOAD ./file_o/rtthread_o/cpuport.o
+LOAD ./file_o/rtthread_o/clock.o
+LOAD ./file_o/rtthread_o/idle.o
+LOAD ./file_o/rtthread_o/kservice.o
+LOAD ./file_o/rtthread_o/scheduler.o
+LOAD ./file_o/rtthread_o/board.o
+LOAD ./file_o/rtthread_o/interrupt_gcc.o
+LOAD libgcc.a
+LOAD libc.a
+OUTPUT(hello elf32-littleriscv)
+
+.comment        0x0000000000000000       0x12
+ .comment       0x0000000000000000       0x12 ./file_o/pulpino_o/timer.o
+                                         0x13 (size before relaxing)
+ .comment       0x0000000000000012       0x13 ./file_o/pulpino_o/utils.o
+ .comment       0x0000000000000012       0x13 ./file_o/pulpino_o/main.o
+ .comment       0x0000000000000012       0x13 ./file_o/pulpino_o/qprintf.o
+ .comment       0x0000000000000012       0x13 ./file_o/pulpino_o/gpio.o
+ .comment       0x0000000000000012       0x13 ./file_o/pulpino_o/spi.o
+ .comment       0x0000000000000012       0x13 ./file_o/pulpino_o/exceptions.o
+ .comment       0x0000000000000012       0x13 ./file_o/pulpino_o/int.o
+ .comment       0x0000000000000012       0x13 ./file_o/pulpino_o/uart.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/timer.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/object.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/irq.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/cpu.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/slab.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/components.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/mempool.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/mem.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/thread.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/ipc.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/memheap.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/interrupt.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/cpuport.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/clock.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/idle.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/kservice.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/scheduler.o
+ .comment       0x0000000000000012       0x13 ./file_o/rtthread_o/board.o
+
+.riscv.attributes
+                0x0000000000000000       0x2a
+ .riscv.attributes
+                0x0000000000000000       0x26 ./file_o/pulpino_o/timer.o
+ .riscv.attributes
+                0x0000000000000026       0x2a ./file_o/pulpino_o/utils.o
+ .riscv.attributes
+                0x0000000000000050       0x28 ./file_o/pulpino_o/crt0_riscv_E.o
+ .riscv.attributes
+                0x0000000000000078       0x26 ./file_o/pulpino_o/main.o
+ .riscv.attributes
+                0x000000000000009e       0x26 ./file_o/pulpino_o/qprintf.o
+ .riscv.attributes
+                0x00000000000000c4       0x26 ./file_o/pulpino_o/gpio.o
+ .riscv.attributes
+                0x00000000000000ea       0x26 ./file_o/pulpino_o/spi.o
+ .riscv.attributes
+                0x0000000000000110       0x26 ./file_o/pulpino_o/exceptions.o
+ .riscv.attributes
+                0x0000000000000136       0x26 ./file_o/pulpino_o/int.o
+ .riscv.attributes
+                0x000000000000015c       0x26 ./file_o/pulpino_o/uart.o
+ .riscv.attributes
+                0x0000000000000182       0x26 ./file_o/rtthread_o/timer.o
+ .riscv.attributes
+                0x00000000000001a8       0x26 ./file_o/rtthread_o/object.o
+ .riscv.attributes
+                0x00000000000001ce       0x26 ./file_o/rtthread_o/irq.o
+ .riscv.attributes
+                0x00000000000001f4       0x26 ./file_o/rtthread_o/cpu.o
+ .riscv.attributes
+                0x000000000000021a       0x26 ./file_o/rtthread_o/slab.o
+ .riscv.attributes
+                0x0000000000000240       0x26 ./file_o/rtthread_o/components.o
+ .riscv.attributes
+                0x0000000000000266       0x26 ./file_o/rtthread_o/mempool.o
+ .riscv.attributes
+                0x000000000000028c       0x26 ./file_o/rtthread_o/mem.o
+ .riscv.attributes
+                0x00000000000002b2       0x26 ./file_o/rtthread_o/thread.o
+ .riscv.attributes
+                0x00000000000002d8       0x26 ./file_o/rtthread_o/ipc.o
+ .riscv.attributes
+                0x00000000000002fe       0x26 ./file_o/rtthread_o/memheap.o
+ .riscv.attributes
+                0x0000000000000324       0x26 ./file_o/rtthread_o/interrupt.o
+ .riscv.attributes
+                0x000000000000034a       0x28 ./file_o/rtthread_o/context_gcc.o
+ .riscv.attributes
+                0x0000000000000372       0x26 ./file_o/rtthread_o/cpuport.o
+ .riscv.attributes
+                0x0000000000000398       0x26 ./file_o/rtthread_o/clock.o
+ .riscv.attributes
+                0x00000000000003be       0x26 ./file_o/rtthread_o/idle.o
+ .riscv.attributes
+                0x00000000000003e4       0x26 ./file_o/rtthread_o/kservice.o
+ .riscv.attributes
+                0x000000000000040a       0x26 ./file_o/rtthread_o/scheduler.o
+ .riscv.attributes
+                0x0000000000000430       0x2a ./file_o/rtthread_o/board.o
+ .riscv.attributes
+                0x000000000000045a       0x28 ./file_o/rtthread_o/interrupt_gcc.o
