@@ -148,7 +148,7 @@ rt_hw_context_switch_exit:
     addi  t1, t0, 1
     li    t2, __STACKSIZE__
     mul   t1, t1, t2
-    add   sp, sp, -t1 /* sp = (cpuid + 1) * __STACKSIZE__ + __stack_start__ */
+    add   sp, sp, t1 /* sp = (cpuid + 1) * __STACKSIZE__ + __stack_start__ */
 
     call rt_signal_check
     mv sp, a0

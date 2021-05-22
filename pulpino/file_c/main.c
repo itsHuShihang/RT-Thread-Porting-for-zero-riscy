@@ -17,12 +17,23 @@ int main(void)
 	int j = 0;
 	while (1)
 	{
-		set_gpio_pin_value(j + 1, 1);
-		set_gpio_pin_value(j, 0);
-		j++;
-		j = j % 8;
-		rt_thread_mdelay(100);
+		// printf("delay begin\n");
+		// set_gpio_pin_value(j + 1, 1);
+		// set_gpio_pin_value(j, 0);
+		// j++;
+		// j = j % 8;
+
+		// rt_thread_delay(50);
+		// printf("delay end\n");
+		set_gpio_pin_value(0, 1);
+		rt_thread_delay(100);
+		set_gpio_pin_value(1, 1);
+		rt_thread_delay(100);
+		set_gpio_pin_value(2, 1);
+		rt_thread_delay(100);
+		set_gpio_pin_value(3, 1);
 	}
+
 	return 0;
 }
 
