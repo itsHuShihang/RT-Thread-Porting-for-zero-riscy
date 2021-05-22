@@ -10,7 +10,7 @@ stack            0x0000000000105000 0x0000000000003000
 Linker script and memory map
 
                 0x0000000000000000                __DYNAMIC = 0x0
-                0x0000000000001000                _min_stack = 0x1000
+                0x0000000000003000                _min_stack = 0x3000
                 0x0000000000003000                _stack_len = LENGTH (stack)
                 0x0000000000108000                _stack_start = (ORIGIN (stack) + LENGTH (stack))
 
@@ -420,13 +420,13 @@ Linker script and memory map
                 0x00000000001028fc                . = ALIGN (0x4)
                 0x00000000001028fc                _end = .
 
-.stack          0x0000000000105000     0x1000
+.stack          0x0000000000105000     0x3000
                 0x0000000000105000                . = ALIGN (0x4)
-                0x0000000000106000                . = (. + _min_stack)
- *fill*         0x0000000000105000     0x1000 
-                0x0000000000106000                . = ALIGN (0x4)
-                0x0000000000106000                stack = .
-                0x0000000000106000                _stack = .
+                0x0000000000108000                . = (. + _min_stack)
+ *fill*         0x0000000000105000     0x3000 
+                0x0000000000108000                . = ALIGN (0x4)
+                0x0000000000108000                stack = .
+                0x0000000000108000                _stack = .
 
 .stab
  *(.stab)
