@@ -21,7 +21,7 @@ int main(void)
 		set_gpio_pin_value(j, 0);
 		j++;
 		j = j % 8;
-		rt_thread_delay(100);
+		rt_thread_mdelay(100);
 	}
 	return 0;
 }
