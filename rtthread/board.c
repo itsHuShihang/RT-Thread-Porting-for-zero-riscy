@@ -45,7 +45,6 @@ void ISR_TA_CMP(void)
     //rt_interrupt_enter();
     /* tick increase */
     rt_tick_increase();
-    printf("tick:%d\n", rt_tick_get());
     /* leave interrupt */
     //rt_interrupt_leave();
 }
