@@ -3,6 +3,7 @@
 *.out
 *.hex
 *.mif
+*.webm
 ext_mem.dat
 obj.s
 hello
