@@ -75,6 +75,7 @@ static void ostick_config(rt_uint32_t ticks)
     /* set value */
     //*(rt_uint64_t *)(TOCRA) = ticks;
     TOCRA = ticks;
+    printf("ticks value:%d\n", ticks);
     /* enable timer A compare interrupt */
     IER = 1 << 29 | 1 << 28;
     int_enable();
