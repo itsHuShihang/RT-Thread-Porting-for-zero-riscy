@@ -259,18 +259,6 @@ void rt_object_init(struct rt_object         *object,
             node  = node->next)
     {
         struct rt_object *obj;
-        for (int j = 0; j < 100000;j++);
-        if (hsh == 1)
-        {
-            hsh = 0;
-            }
-            else
-            {
-                hsh = 1;
-            }
-
-        set_gpio_pin_value(3, hsh);//monitor
-
         obj = rt_list_entry(node, struct rt_object, list);
         RT_ASSERT(obj != object);
     }
