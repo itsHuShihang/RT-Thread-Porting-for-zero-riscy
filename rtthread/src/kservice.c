@@ -534,7 +534,7 @@ char *strdup(const char *s) __attribute__((alias("rt_strdup")));
  */
 void rt_show_version(void)
 {
-    printf("show version, start\n");//monitor
+    //printf("show version, start\n");//monitor
     printf("\n \\ | /\n");
     printf("- RT -     Thread Operating System\n");
     printf(" / | \\     %d.%d.%d build %s\n",

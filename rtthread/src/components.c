@@ -197,7 +197,7 @@ void main_thread_entry(void *parameter)
 
 void rt_application_init(void)
 {
-    printf("application init, start\n");//monitor
+    //printf("application init, start\n");//monitor
     rt_thread_t tid;
 
 #ifdef RT_USING_HEAP
@@ -223,24 +223,24 @@ int rtthread_startup(void)
 {
     uart_set_cfg(0, 12);
     while(uart_getchar() != 'q');
-    printf("rt-thread start...\n");
+    //printf("rt-thread start...\n");
 
     rt_hw_interrupt_disable();
-    printf("interrupt disable, done\n");//monitor
+    //printf("interrupt disable, done\n");//monitor
     /* board level initialization
      * NOTE: please initialize heap inside board initialization.
      */
     rt_hw_board_init();
-    printf("board init, done\n");//monitor
+    //printf("board init, done\n");//monitor
     /* show RT-Thread version */
     rt_show_version();
-    printf("show version, done\n");//monitor
+    //printf("show version, done\n");//monitor
     /* timer system initialization */
     rt_system_timer_init();
-    printf("system timer init, done\n");//monitor
+    //printf("system timer init, done\n");//monitor
     /* scheduler system initialization */
     rt_system_scheduler_init();
-    printf("system scheduler init, done\n");//monitor
+    //printf("system scheduler init, done\n");//monitor
 #ifdef RT_USING_SIGNALS
     /* signal system initialization */
     rt_system_signal_init();
@@ -248,13 +248,13 @@ int rtthread_startup(void)
 
     /* create init_thread */
     rt_application_init();
-    printf("application init, done\n");//monitor
+    //printf("application init, done\n");//monitor
     /* timer thread initialization */
     rt_system_timer_thread_init();
-    printf("system timer thread init, done\n");//monitor
+    //printf("system timer thread init, done\n");//monitor
     /* idle thread initialization */
     rt_thread_idle_init();
-    printf("thread idle init, done\n");//monitor
+    //printf("thread idle init, done\n");//monitor
     /* start scheduler */
     rt_system_scheduler_start();
 

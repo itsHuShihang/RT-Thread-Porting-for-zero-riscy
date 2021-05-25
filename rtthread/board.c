@@ -95,13 +95,13 @@ RT_WEAK void *rt_heap_end_get(void)
  */
 void rt_hw_board_init()
 {
-    printf("board init, start\n");//monitor
+    //printf("board init, start\n");//monitor
     /* system clock configuration is not necessary for pulpino*/
     //riscv_clock_init();
 
     /* OS Tick Configuration */
     ostick_config(TMR_FREQ / RT_TICK_PER_SECOND);
-    printf("ostick config, done\n");//monitor
+    //printf("ostick config, done\n");//monitor
     /* Call components board initial (use INIT_BOARD_EXPORT()) */
 #ifdef RT_USING_COMPONENTS_INIT
     rt_components_board_init();

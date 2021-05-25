@@ -678,7 +678,7 @@ static void rt_thread_timer_entry(void *parameter)
  */
 void rt_system_timer_init(void)
 {
-    printf("system timer init, start\n");//monitor
+    //printf("system timer init, start\n");//monitor
     int i;
 
     for (i = 0; i < sizeof(rt_timer_list) / sizeof(rt_timer_list[0]); i++)
@@ -694,7 +694,7 @@ void rt_system_timer_init(void)
  */
 void rt_system_timer_thread_init(void)
 {
-    printf("system timer thread init, start\n");//monitor
+    //printf("system timer thread init, start\n");//monitor
 #ifdef RT_USING_TIMER_SOFT
     int i;
 

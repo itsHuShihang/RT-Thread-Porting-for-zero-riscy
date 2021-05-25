@@ -254,7 +254,7 @@ static void rt_thread_idle_entry(void *parameter)
  */
 void rt_thread_idle_init(void)
 {
-    printf("thread idle init, start\n");//monitor
+    //printf("thread idle init, start\n");//monitor
     /* initialize thread */
     rt_thread_init(&idle,
                    "tidle",
