@@ -224,9 +224,6 @@ void rt_thread_idle_excute(void)
 extern void rt_system_power_manager(void);
 static void rt_thread_idle_entry(void *parameter)
 {
-    printf("\nthread name is %s\n",rt_thread_self()->name);
-    printf("thread init priority is %d\n",rt_thread_self()->init_priority);
-    printf("thread current priority is %d\n",rt_thread_self()->current_priority);
     while (1)
     {
 #ifdef RT_USING_IDLE_HOOK

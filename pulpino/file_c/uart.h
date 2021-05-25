@@ -75,4 +75,6 @@ void uart_wait_tx_done(void);
 
 void uart_getstring(char *);
 
+void uart_set_interrupt(uint8_t interrupt);
+
 #endif

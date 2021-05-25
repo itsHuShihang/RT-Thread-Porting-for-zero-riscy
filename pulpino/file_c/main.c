@@ -1,22 +1,24 @@
 #include "../../rtthread/include/rtthread.h"
+#include "../../rtthread/libcpu/risc-v/interrupt.h"
 
-/**
- * \brief This is main function.
- * \param void
- * \return 0
-*/
+void ISR_UART(void)
+{
+	printf("hello world! here's your character: %c\n", *(volatile int *)UART_REG_RBR);
+	ICP |= 1 << 24;
+}
+
 int main(void)
 {
-	printf("This is my main function\n");
-	printf("thread name is %s\n",rt_thread_self()->name);
-	printf("thread init priority is %d\n",rt_thread_self()->init_priority);
-	printf("thread current priority is %d\n",rt_thread_self()->current_priority);
-
-	start_timer();
-
-	while(1)
+	for (int i = 0; i < 8; i++)
 	{
-		sleep();
+		set_gpio_pin_direction(i, 1);
+		set_gpio_pin_value(i, 0);
 	}
+	int_disable();
+	IER |= 1 << 24;
+	SystemIrqHandler_set(ISR_UART, 24);
+	uart_set_interrupt(1);
+	int_enable();
+
 	return 0;
 }

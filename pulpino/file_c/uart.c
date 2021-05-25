@@ -90,3 +90,10 @@ void uart_getstring(char * str)
   *str = '\0';
   return;
 }
+
+void uart_set_interrupt(uint8_t interrupt)
+{
+  *LCR_UART &= 0x7F; //set DLAB = 0 to access IER
+  *IER_UART = interrupt;
+  return;
+}
