@@ -1,5 +1,5 @@
 # RT-Thread Nano for zero-riscy Core
-查看此文档的[中文版本](README_CN.md)。
+Read the [English Edition](README.md) of this document.
 ## 简介
 ### 项目简介
 本项目使用PULPino SoC，使用安路公司EG4系列FPGA开发板运行，移植了RT-Thread Nano操作系统内核。
