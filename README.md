@@ -1,38 +1,40 @@
 # RT-Thread Nano for zero-riscy Core
 查看此文档的[中文版本](README_CN.md)。
-## 简介
-### 项目简介
-本项目使用PULPino SoC，使用安路公司EG4系列FPGA开发板运行，移植了RT-Thread Nano操作系统内核。
-### PULPino简介
-PULPino是一款开源的单核SoC，是基于苏黎世联邦理工学院开发的32位RISC-V内核，PULP开发的，具有功耗低、面积小的特点，可配置为使用RISCY或zero-riscy核心。具体信息详见[PULPino GitHub](https://github.com/pulp-platform/pulpino).
-### RT-Thread简介
-RT-Thread是一个专门针对嵌入式设备的实时操作系统，主要采用C语言进行编写，较为浅显易懂，方便移植，并且可裁剪性非常好。具体信息详见[RT-Thread官网](https://www.rt-thread.org/)或[RT-Thread GitHub](https://github.com/RT-Thread/rt-thread).
-## 如何使用
-### 编译
-本项目使用32位RISC-V GNU工具链，需要在Linux环境下安装此工具链进行交叉编译。安装方法间[这篇帖子](https://www.cnblogs.com/mikewolf2002/p/10799553.html)。当然其它版本的工具链应该也可以，只要是32位的RISC-V就行，但是我没试过，这里不做保证。
-### 运行
-调试较为快速的方式是使用串口直接烧写程序到RAM里，首先需要在FPGA开发板中烧写接收程序，这一部分是我的同学实现的，主要利用了逻辑代码中串口收发相关的函数，详见[这个仓库](https://github.com/HighLevelWallace/pulpino_project)。使用与硬件配套的软件对Verilog代码进行综合，然后烧写进去运行就好了。
+## Introduction
+### Project Overview
+This project utilizes the PULPino SoC and the Anlogic EG4 series FPGA development board to run the RT-Thread Nano operating system kernel.
+### PULPino Overview
+PULPino is an open-source single-core SoC based on a 32-bit RISC-V core developed by ETH Zurich and PULP. It is characterized by low power consumption and small area and can be configured to use either the RISCY or zero-riscy core. For more information, please refer to the [PULPino GitHub](https://github.com/pulp-platform/pulpino).
+### RT-Thread Overview
+RT-Thread is a real-time operating system specifically designed for embedded devices. It is mainly written in C language, easy to understand, and has good portability and configurability. For more information, please visit the [RT-Thread official website](https://www.rt-thread.org/) or [RT-Thread GitHub](https://github.com/RT-Thread/rt-thread).
+## How to Use
+### Compilation
+This project uses the 32-bit RISC-V GNU toolchain and requires installation of this toolchain for cross-compilation on a Linux environment. You can follow the instructions in [this post](https://www.cnblogs.com/mikewolf2002/p/10799553.html). Other versions of the toolchain should also work as long as they are 32-bit RISC-V, but I haven't tested them, so I can't guarantee compatibility.
+### Execution
+A quick way to debug is to directly write the program to RAM via the serial port. First, you need to write the receiving program to the FPGA development board. This part has been implemented by my colleague and mainly utilizes the serial communication functions in the logic code. Please refer to [this repository](https://github.com/HighLevelWallace/pulpino_project) for more details. Synthesize the Verilog code using the software provided with the hardware, and then burn it to run.
 
-接着把硬件串口连接到电脑上，在Linux环境下只需使用
+Next, connect the hardware serial port to your computer. In a Linux environment, simply run:
 ```bash
 sh run.sh
 ```
-就可以自动完成编译和烧写的整套流程。
-也可以单独使用
+to automatically complete the compilation and burning process.
+
+Alternatively, you can compile separately using:
 ```bash
 python C2SO.py
 ```
-进行编译，并且使用
+to compile and use
 ```bash
 python serialout.py
 ```
-进行烧写。
+to burn.
 
-在`pulpino/file_c/main.c`文件中已经预先写好了几个示例程序，包括中断、os tick和有关线程管理的几个功能。在文件的最上方有一个宏定义的区域，可以通过打开或注释掉宏定义的方式来选择要运行的示例程序，但是需要注意，建议一次只打开一个宏定义，应为不同的示例程序一起运行可能会出现某些冲突导致错误。
+Several sample programs, including interrupt handling, OS tick, and thread management, have been pre-written in the `pulpino/file_c/main.c` file. At the top of the file, there is a macro definition section where you can enable or disable specific macro definitions to choose which sample program to run. However, please note that it is recommended to enable only one macro definition at a time, as running different sample programs together may cause conflicts and errors.
 
-如果要运行自己的应用程序，只需将示例程序删除，并且定义自己的主函数即可。RT-Thread Nano中没有操作系统和应用程序分离的功能，所以在自定义应用程序时只需在`pulpino/file_c`文件夹中添加自己需要的文件，并在`pulpino/file_c/main.c`文件中书写自己的主函数即可，不需要关心其它文件，但在编译时要带着包括操作系统文件在内的所有文件一起编译。
+To run your own application, simply delete the sample programs and define your own main function. In RT-Thread Nano, there is no separation between the operating system and application programs. Therefore, when customizing an application program, you only need to add the necessary files to the `pulpino/file_c` folder and write your own main function in the `pulpino/file_c/main.c` file. You don't need to worry about other files, but make sure to include all the files, including the operating system files, when compiling.
 
-注意，如果需要额外添加文件夹，则需要在`C2SO.py`中修改编译脚本，否则将出现编译时遗漏文件的问题。
+Note that if you need to add additional folders, you need to modify the compilation script in `C2SO.py` to avoid missing files during compilation.
+
 ## 移植过程
 ### 文件结构
 本项目的文件结构如下，
